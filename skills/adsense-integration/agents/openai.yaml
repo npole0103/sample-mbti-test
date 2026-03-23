@@ -1,0 +1,4 @@
+interface:
+  display_name: "AdSense Integration"
+  short_description: "Add safe Google AdSense integration"
+  default_prompt: "Use $adsense-integration to add or validate safe Google AdSense placement in this app."
