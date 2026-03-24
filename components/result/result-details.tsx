@@ -12,27 +12,55 @@ export function ResultDetails({ result }: ResultDetailsProps) {
   const style = {
     "--accent": result.palette.accent,
     "--accent-soft": result.palette.soft,
-    "--accent-text": result.palette.text
+    "--accent-text": result.palette.text,
+    "--accent-glaze": result.palette.glaze
   } as CSSProperties;
 
   return (
     <article className="result-card" style={style}>
       <section className="result-banner">
-        <p className="eyebrow">Dessert Result</p>
-        <h1>
-          {result.name} <span>{result.subtitle}</span>
-        </h1>
-        <p className="lead">{result.summary}</p>
+        <div className="result-badge" aria-hidden="true">
+          <div className="result-badge__glow" />
+          <div className="result-badge__dessert">{result.icon.dessert}</div>
+          <div className="result-badge__garnish">{result.icon.garnish}</div>
+          <div className="result-badge__label">{result.icon.badge}</div>
+        </div>
+
+        <div className="result-banner__copy">
+          <p className="eyebrow">Result {result.mbti}</p>
+          <h1>
+            {result.name} <span>{result.subtitle}</span>
+          </h1>
+          <p className="lead">{result.summary}</p>
+          <div className="tag-row">
+            {result.tags.map((tag) => (
+              <span className="tag-pill" key={tag}>
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="result-section">
-        <h2>연애할 때 나는 이런 사람</h2>
+        <p className="eyebrow">Flavor Notes</p>
+        <div className="flavor-grid">
+          {result.flavorNotes.map((note) => (
+            <div className="flavor-chip" key={note}>
+              {note}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="result-section">
+        <h2>이 디저트가 당신인 이유</h2>
         <p>{result.description}</p>
       </section>
 
       <section className="result-columns">
         <div className="result-section">
-          <h2>이럴 때 특히 매력적</h2>
+          <h2>연애에서 더 맛있는 포인트</h2>
           <ul>
             {result.strengths.map((item) => (
               <li key={item}>{item}</li>
@@ -40,7 +68,7 @@ export function ResultDetails({ result }: ResultDetailsProps) {
           </ul>
         </div>
         <div className="result-section">
-          <h2>이럴 땐 조심해요</h2>
+          <h2>관계에서 더 부드러워지는 팁</h2>
           <ul>
             {result.cautions.map((item) => (
               <li key={item}>{item}</li>
@@ -51,11 +79,11 @@ export function ResultDetails({ result }: ResultDetailsProps) {
 
       <section className="result-columns">
         <div className="result-section">
-          <h2>잘 맞는 디저트형</h2>
+          <h2>잘 맞는 빵 조합</h2>
           <p>{result.bestMatch}</p>
         </div>
         <div className="result-section">
-          <h2>조심할 조합</h2>
+          <h2>천천히 맞춰볼 포인트</h2>
           <p>{result.trickyMatch}</p>
         </div>
       </section>
@@ -66,17 +94,17 @@ export function ResultDetails({ result }: ResultDetailsProps) {
       </section>
 
       <ShareActions
-        highlights={result.strengths}
-        title={`${result.name} · ${result.subtitle}`}
-        text={`나는 ${result.name}래. ${result.summary}`}
+        highlights={result.flavorNotes}
+        title={`${result.name} | ${result.subtitle}`}
+        text={`${result.summary} ${result.tags.map((tag) => `#${tag}`).join(" ")}`}
       />
 
       <div className="result-footer">
         <Link className="secondary-button" href="/test">
-          다시 테스트하기
+          다시 테스트 굽기
         </Link>
         <Link className="secondary-button" href="/">
-          랜딩으로 돌아가기
+          메인 쇼윈도로 돌아가기
         </Link>
       </div>
     </article>

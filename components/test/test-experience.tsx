@@ -8,6 +8,13 @@ import { getResultFromAnswers } from "@/lib/scoring";
 import { ProgressBar } from "@/components/test/progress-bar";
 import { QuestionCard } from "@/components/test/question-card";
 
+const chapterLabels = [
+  { until: 6, label: "오븐 예열" },
+  { until: 12, label: "반죽 정리" },
+  { until: 18, label: "굽는 중" },
+  { until: 24, label: "쇼윈도 포장" }
+];
+
 export function TestExperience() {
   const router = useRouter();
   const [index, setIndex] = useState(0);
@@ -17,6 +24,8 @@ export function TestExperience() {
   const unlockTimerRef = useRef<number | null>(null);
 
   const question = questions[index];
+  const currentQuestion = index + 1;
+  const chapter = chapterLabels.find((item) => currentQuestion <= item.until)?.label ?? "완성";
 
   const handleSelect = (trait: Trait) => {
     if (isAdvancing || isPending) {
@@ -51,12 +60,14 @@ export function TestExperience() {
 
   return (
     <div className="test-shell">
-      <ProgressBar current={index + 1} total={questions.length} />
+      <div className="chapter-chip">{chapter}</div>
+      <ProgressBar current={currentQuestion} total={questions.length} />
       <QuestionCard disabled={isAdvancing || isPending} question={question} onSelect={handleSelect} />
       <p className="micro-copy">
-        질문 중 광고는 넣지 않았어요. 흐름에만 집중해서 빠르게 끝낼 수 있게 구성했습니다.
+        질문을 푸는 동안에는 광고가 노출되지 않아요. 흐름이 끊기지 않도록 가볍고 빠른 모바일
+        경험에 집중했습니다.
       </p>
-      {isPending ? <p className="micro-copy">결과를 굽는 중이에요...</p> : null}
+      {isPending ? <p className="micro-copy">결과 카드를 쇼윈도에 올리는 중이에요...</p> : null}
     </div>
   );
 }

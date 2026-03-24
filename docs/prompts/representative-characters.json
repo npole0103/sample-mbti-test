@@ -1,0 +1,66 @@
+[
+  {
+    "slug": "ddujjonku-entp",
+    "nameKo": "두바이쫀득쿠키",
+    "mbti": "ENTP",
+    "archetype": "예상 밖으로 터지는 화제형",
+    "traits": ["재치", "실험성", "에너지", "빠른 반응"],
+    "visualNotes": [
+      "두껍고 둥근 초콜릿 쿠키 또는 반달형 쿠키 쉘 실루엣",
+      "반으로 갈랐을 때 피스타치오 크림, 바삭한 카다이프, 쫀득한 마시멜로 층이 단면에 또렷하게 보임",
+      "겉은 초콜릿 코팅 또는 코코아 톤, 속은 피스타치오 그린과 황금빛 카다이프가 대비되는 구조",
+      "살짝 장난기 있는 눈매와 자신감 있는 포즈",
+      "고급 디저트 숍 느낌의 정갈한 드리즐과 절제된 스파크 포인트"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real Dubai-style chewy cookie dessert, elegant and cute, luxury Korean bakery branding, warm ivory, pistachio, caramel, and chocolate palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, not childish, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the character clean, witty, and highly readable. Make it unmistakably a Dubai chewy cookie with visible pistachio cream filling, kataifi texture, and glossy chocolate accents. Focus on premium dessert identity first, mascot second.",
+      "rare": "Add exactly one or two elegant premium adornments that match an ENTP Dubai chewy cookie character: for example refined pistachio cream piping, boutique chocolate drizzle, or a clever signature garnish. Keep it fashionable, premium, and realistic. Do not add aura, glow, sparkle, magical effects, or more than two adornments.",
+      "superRare": "Make it unmistakably super rare and luxurious. Add exactly two or three couture adornments, such as jewel-like pistachio garnish, premium ribbon or collector tag detail, and ornate chocolate decoration. The character must also have a more luxurious expression or confident high-end pose. Visible rarity effects are required: soft glow, elegant sparkle, luminous highlight, or collector-grade luxury lighting. This version must look clearly more extravagant and rarer than the rare version."
+    },
+    "dropRate": { "common": 77, "rare": 20, "superRare": 3 },
+    "variantsPerRarity": 16
+  },
+  {
+    "slug": "buttertteok-isfj",
+    "nameKo": "버터떡",
+    "mbti": "ISFJ",
+    "archetype": "익숙해서 더 자주 생각나는 포근형",
+    "traits": ["포근함", "생활형 애정", "헌신", "안정감"],
+    "visualNotes": [
+      "작고 도톰한 마들렌 또는 미니 파운드케이크처럼 봉긋한 타원형 실루엣",
+      "윗면은 버터에 구워진 진한 황금빛과 갈색 크러스트, 아래쪽은 매끈하고 촉촉한 결",
+      "겉은 바삭하지만 속은 찹쌀 반죽처럼 밀도 높고 쫀득한 내부 구조",
+      "버터 향이 강한 구움과자 무드, 마들렌과 떡 사이의 하이브리드 디저트 인상"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real butter rice cake pastry, elegant and cute, luxury Korean bakery branding, warm ivory and butter cream palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, not childish, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the character soft, comforting, and neatly finished. Focus on the buttery surface, chewy rice cake body, and a calm, dependable expression.",
+      "rare": "Add exactly one or two elegant premium adornments that match an ISFJ Shanghai buttertteok character: for example refined bakery wrapping, a delicate butter flower garnish, or a gentle boutique ribbon detail. Keep it warm, premium, and realistic. Do not add aura, glow, sparkle, magical effects, or more than two adornments.",
+      "superRare": "Make it unmistakably super rare and luxurious. Add exactly two or three couture adornments, such as premium wrapping detail, collector-grade butter garnish, pearl-like sugar decoration, or boutique label ornament. The character must also have a more luxurious expression or graceful high-end pose. Visible rarity effects are required: soft glow, elegant sparkle, luminous highlight, or flagship boutique lighting. This version must look clearly more extravagant and rarer than the rare version."
+    },
+    "dropRate": { "common": 77, "rare": 20, "superRare": 3 },
+    "variantsPerRarity": 16
+  },
+  {
+    "slug": "sourdough-intj",
+    "nameKo": "사워도우 로프",
+    "mbti": "INTJ",
+    "archetype": "계획을 굽는 아틀리에형",
+    "traits": ["완성도", "기준", "깊이감", "장인성"],
+    "visualNotes": [
+      "긴 타원형 바타르 또는 둥근 불 형태의 묵직한 수제빵 실루엣",
+      "윗면에 깊고 길게 열린 칼집과 발효로 벌어진 귀 모양의 크러스트",
+      "짙은 갈색부터 황금빛까지 이어지는 두꺼운 크러스트와 얇은 밀가루 더스팅",
+      "속은 기공이 살아 있는 오픈 크럼을 암시하되, 과한 표정보다 절제된 장인 분위기"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real artisan sourdough loaf, elegant and cute, luxury Korean bakery branding, warm ivory and toasted caramel palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, not childish, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the loaf grounded, refined, and artisan-led. Emphasize the scoring pattern, crust texture, and a composed, intelligent expression.",
+      "rare": "Add exactly one or two elegant premium adornments that match an INTJ artisan sourdough character: for example refined grain garnish, tailored bakery seal detail, or more intricate scoring as a premium accent. Keep it disciplined, premium, and realistic. Do not add aura, glow, sparkle, magical effects, or more than two adornments.",
+      "superRare": "Make it unmistakably super rare and elite. Add exactly two or three couture adornments, such as luxury grain ornament, collector bakery seal, sculptural scoring accent, or high-end presentation detail. The character must also have a more luxurious expression or poised flagship pose. Visible rarity effects are required: refined glow, prestige sparkle, luminous highlight, or high-end boutique lighting. This version must look clearly more extravagant and rarer than the rare version."
+    },
+    "dropRate": { "common": 77, "rare": 20, "superRare": 3 },
+    "variantsPerRarity": 16
+  }
+]

@@ -37,12 +37,12 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     let line = "";
     let currentY = y;
 
-    for (let i = 0; i < words.length; i += 1) {
-      const testLine = line ? `${line} ${words[i]}` : words[i];
+    for (const word of words) {
+      const testLine = line ? `${line} ${word}` : word;
       const metrics = ctx.measureText(testLine);
       if (metrics.width > maxWidth && line) {
         ctx.fillText(line, x, currentY);
-        line = words[i];
+        line = word;
         currentY += lineHeight;
       } else {
         line = testLine;
@@ -67,12 +67,12 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     }
 
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, "#fff7ef");
-    gradient.addColorStop(1, "#f7ead9");
+    gradient.addColorStop(0, "#fff8ef");
+    gradient.addColorStop(1, "#f7ead8");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.86)";
+    ctx.fillStyle = "rgba(255, 252, 246, 0.92)";
     ctx.strokeStyle = "rgba(95, 63, 42, 0.14)";
     ctx.lineWidth = 3;
     const cardX = 70;
@@ -83,29 +83,29 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     ctx.strokeRect(cardX, cardY, cardW, cardH);
 
     const contentX = cardX + 70;
-    let currentY = cardY + 130;
+    let currentY = cardY + 110;
     const contentWidth = cardW - 140;
 
-    ctx.fillStyle = "#ba6843";
-    ctx.font = "700 34px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText("나는 어떤 디저트형 연애일까?", contentX, currentY);
+    ctx.fillStyle = "#b87444";
+    ctx.font = "700 30px Pretendard, Apple SD Gothic Neo, sans-serif";
+    ctx.fillText("Maison Butter Atelier", contentX, currentY);
 
-    currentY += 96;
+    currentY += 92;
     ctx.fillStyle = "#3e2b21";
-    ctx.font = "700 72px Pretendard, Apple SD Gothic Neo, sans-serif";
-    currentY = wrapText(ctx, title, contentX, currentY, contentWidth, 88);
+    ctx.font = "700 68px Pretendard, Apple SD Gothic Neo, sans-serif";
+    currentY = wrapText(ctx, title, contentX, currentY, contentWidth, 84);
 
-    currentY += 30;
+    currentY += 18;
     ctx.fillStyle = "#5f473b";
-    ctx.font = "500 42px Pretendard, Apple SD Gothic Neo, sans-serif";
-    currentY = wrapText(ctx, text, contentX, currentY, contentWidth, 62);
+    ctx.font = "500 40px Pretendard, Apple SD Gothic Neo, sans-serif";
+    currentY = wrapText(ctx, text, contentX, currentY, contentWidth, 58);
 
-    currentY += 42;
-    ctx.fillStyle = "#ba6843";
-    ctx.font = "700 36px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText("이 유형의 특징", contentX, currentY);
+    currentY += 38;
+    ctx.fillStyle = "#b87444";
+    ctx.font = "700 34px Pretendard, Apple SD Gothic Neo, sans-serif";
+    ctx.fillText("Flavor Notes", contentX, currentY);
 
-    currentY += 52;
+    currentY += 50;
     ctx.fillStyle = "#4a2f20";
     ctx.font = "500 34px Pretendard, Apple SD Gothic Neo, sans-serif";
     highlights.slice(0, 3).forEach((item) => {
@@ -137,12 +137,12 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
         ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
       }
     } catch {
-      // QR 생성에 실패해도 이미지는 계속 생성한다.
+      // QR code generation is optional for the fallback share image.
     }
 
     ctx.fillStyle = "#7b6356";
-    ctx.font = "500 26px Pretendard, Apple SD Gothic Neo, sans-serif";
-    wrapText(ctx, window.location.href, contentX, cardY + cardH - 80, contentWidth - 260, 36);
+    ctx.font = "500 24px Pretendard, Apple SD Gothic Neo, sans-serif";
+    wrapText(ctx, window.location.href, contentX, cardY + cardH - 84, contentWidth - 260, 34);
 
     return await new Promise<Blob | null>((resolve) => {
       canvas.toBlob((blob) => resolve(blob), "image/png");
@@ -165,12 +165,12 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
 
       if (navigator.clipboard?.writeText && window.isSecureContext) {
         await navigator.clipboard.writeText(shareText);
-        setStatus("링크와 문구를 복사했어요.");
+        setStatus("결과 문구를 복사했어요.");
         return;
       }
 
       if (fallbackCopy(shareText)) {
-        setStatus("링크와 문구를 복사했어요.");
+        setStatus("결과 문구를 복사했어요.");
         return;
       }
     } catch (error) {
@@ -181,8 +181,8 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
       }
     }
 
-    window.prompt("아래 내용을 복사해 공유해 주세요.", shareText);
-    setStatus("자동 복사에 실패해 수동 복사 창을 열었어요.");
+    window.prompt("아래 내용을 복사해서 공유해 주세요.", shareText);
+    setStatus("자동 복사가 어려워서 수동 복사 창을 열어두었어요.");
   };
 
   const handleImageShare = async () => {
@@ -193,10 +193,10 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
         return;
       }
 
-      const file = new File([blob], "dessert-love-result.png", { type: "image/png" });
+      const file = new File([blob], "maison-butter-result.png", { type: "image/png" });
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
         await navigator.share({
-          title: "디저트 연애유형 결과",
+          title: "메종 버터 테스트 결과",
           text: title,
           files: [file]
         });
@@ -207,7 +207,7 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "dessert-love-result.png";
+      link.download = "maison-butter-result.png";
       document.body.append(link);
       link.click();
       link.remove();
@@ -219,6 +219,7 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
         setStatus("이미지 공유를 취소했어요.");
         return;
       }
+
       setStatus("이미지 공유 중 오류가 발생했어요.");
     }
   };
@@ -227,14 +228,14 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     <div className="share-actions">
       <div className="share-buttons">
         <button className="primary-button" onClick={handleTextShare} type="button">
-          글 공유/복사
+          결과 문구 공유
         </button>
         <button className="secondary-button" onClick={handleImageShare} type="button">
-          결과 이미지 공유
+          결과 카드 저장
         </button>
       </div>
       <p className="share-status" role="status">
-        {status || "카카오톡 공유 SDK 연계 전까지 기본 공유 시트 또는 복사를 제공합니다."}
+        {status || "기본 공유 시트와 이미지 저장 기능을 준비해두었어요."}
       </p>
     </div>
   );

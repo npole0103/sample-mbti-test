@@ -35,8 +35,9 @@ export function QuestionCard({ question, onSelect, disabled = false }: QuestionC
     <section className="question-card">
       <p className="eyebrow">Question {question.id}</p>
       <h1>{question.prompt}</h1>
+      <p className="question-note">지금 가장 자연스럽게 느껴지는 쪽을 골라주세요.</p>
       <div className="option-stack">
-        {question.options.map((option) => (
+        {question.options.map((option, optionIndex) => (
           <button
             className="option-button"
             disabled={disabled}
@@ -46,7 +47,8 @@ export function QuestionCard({ question, onSelect, disabled = false }: QuestionC
             onPointerUp={() => triggerSelect(option.trait)}
             type="button"
           >
-            {option.label}
+            <span className="option-button__index">{optionIndex === 0 ? "A" : "B"}</span>
+            <span>{option.label}</span>
           </button>
         ))}
       </div>

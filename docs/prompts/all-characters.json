@@ -1,0 +1,306 @@
+[
+  {
+    "slug": "sourdough-loaf-intj",
+    "nameKo": "사워도우 로프",
+    "mbti": "INTJ",
+    "archetype": "계획을 굽는 아틀리에형",
+    "traits": ["structured", "disciplined", "deep", "artisan confidence"],
+    "visualNotes": [
+      "oval artisan sourdough loaf silhouette",
+      "deep scoring and a clearly opened ear crust",
+      "toasted brown crust with light flour dusting",
+      "cute but composed face and steady posture"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real artisan sourdough loaf, elegant and cute, luxury Korean bakery branding, warm ivory and toasted caramel palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Show the base artisan loaf identity with clean scoring and warm bakery charm.",
+      "rare": "Style it with one or two premium atelier adornments that match an INTJ personality, such as refined grain garnish or tailored bakery seal detail.",
+      "superRare": "Style it as a flagship atelier collectible with two or three couture adornments, luxury grain ornaments, prestige seal details, and clearly visible luxury lighting effects."
+    }
+  },
+  {
+    "slug": "canele-intp",
+    "nameKo": "까눌레",
+    "mbti": "INTP",
+    "archetype": "조용히 분석하는 실험실형",
+    "traits": ["curious", "precise", "quiet", "unexpected depth"],
+    "visualNotes": [
+      "small fluted canele silhouette with deep vertical ridges",
+      "dark caramelized crust and glossy top",
+      "dense custardy interior implied by the shape",
+      "gentle thoughtful face, not stern"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real canele pastry, elegant and cute, luxury Korean bakery branding, warm ivory and dark caramel palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the canele identity clear with clean fluting, glossy top, and quiet charm.",
+      "rare": "Add one or two premium adornments such as a lab-note style tag, subtle sugar crystal accent, or refined caramel garnish that fit an INTP mood.",
+      "superRare": "Make it a collector-style couture canele with two or three elegant adornments, jewel-like sugar details, and clearly visible prestige lighting or sparkle."
+    }
+  },
+  {
+    "slug": "lavender-madeleine-infj",
+    "nameKo": "라벤더 마들렌",
+    "mbti": "INFJ",
+    "archetype": "마음을 오래 남기는 여운형",
+    "traits": ["gentle insight", "quiet warmth", "subtle elegance", "depth"],
+    "visualNotes": [
+      "soft shell-shaped madeleine silhouette",
+      "golden baked edges with a tender butter crumb feel",
+      "small lavender garnish accent",
+      "calm kind face with warm eyes"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real lavender madeleine, elegant and cute, luxury Korean bakery branding, warm ivory and lavender palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the lavender madeleine identity clear and warm with shell ridges and soft floral elegance.",
+      "rare": "Add one or two premium adornments such as a wax-seal style ribbon detail or delicate lavender bouquet garnish.",
+      "superRare": "Make it a poetic flagship madeleine with two or three couture adornments, luminous lavender sparkle, and clearly visible luxury glow."
+    }
+  },
+  {
+    "slug": "milk-bread-loaf-istj",
+    "nameKo": "식빵 로프",
+    "mbti": "ISTJ",
+    "archetype": "기본을 지키는 클래식형",
+    "traits": ["reliable", "steady", "clean", "classic"],
+    "visualNotes": [
+      "tidy milk bread loaf silhouette with rounded top",
+      "soft golden crust and smooth sides",
+      "clean bakery presentation with check napkin cues",
+      "friendly dependable face"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real milk bread loaf, elegant and cute, luxury Korean bakery branding, warm ivory and wheat palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Show the neat classic bread shape with dependable warmth and simple bakery charm.",
+      "rare": "Add one or two premium adornments such as a classic bakery label or refined wheat garnish.",
+      "superRare": "Make it a prestige classic loaf with two or three couture adornments, premium wheat ornaments, and clearly visible soft luxury glow."
+    }
+  },
+  {
+    "slug": "dubai-chewy-cookie-entp",
+    "nameKo": "두바이쫀득쿠키",
+    "mbti": "ENTP",
+    "archetype": "예상 밖으로 터지는 화제형",
+    "traits": ["witty", "experimental", "energetic", "fast reaction"],
+    "visualNotes": [
+      "thick chocolate cookie or half-moon cookie shell silhouette",
+      "visible pistachio cream, kataifi strands, and chewy marshmallow layer in the cut section",
+      "chocolate exterior contrasted with pistachio green interior",
+      "playful but sweet face, never mischievous in a scary way"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real Dubai-style chewy cookie dessert, elegant and cute, luxury Korean bakery branding, warm ivory, pistachio, caramel, and chocolate palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Show the Dubai chewy cookie identity first with pistachio cream filling, kataifi texture, and premium dessert charm.",
+      "rare": "Add one or two premium adornments such as refined pistachio piping or boutique chocolate drizzle that fit an ENTP personality.",
+      "superRare": "Make it a flagship collector Dubai chewy cookie with two or three couture adornments, jewel-like pistachio details, and clearly visible luxury sparkle or glow."
+    }
+  },
+  {
+    "slug": "kouign-amann-istp",
+    "nameKo": "쿠인아망",
+    "mbti": "ISTP",
+    "archetype": "기술이 숨어 있는 공방형",
+    "traits": ["skilled", "quiet", "sharp", "independent"],
+    "visualNotes": [
+      "round laminated kouign-amann silhouette",
+      "crispy layered butter folds with caramelized edges",
+      "visible flaky spiral structure",
+      "cool but friendly face with compact stance"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real kouign-amann pastry, elegant and cute, luxury Korean bakery branding, warm ivory and butter caramel palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the laminated layers and caramelized folds clearly visible with understated craft charm.",
+      "rare": "Add one or two premium adornments such as refined butter crystal garnish or compact artisan tag detail.",
+      "superRare": "Make it a collector-level laminated pastry with two or three couture adornments, luxe caramel sparkle, and clear prestige lighting."
+    }
+  },
+  {
+    "slug": "mont-blanc-infp",
+    "nameKo": "몽블랑",
+    "mbti": "INFP",
+    "archetype": "감정을 포근하게 쌓는 무드형",
+    "traits": ["dreamy", "gentle", "soft", "sincere"],
+    "visualNotes": [
+      "mont blanc swirl mound silhouette",
+      "fine chestnut cream strands over a soft base",
+      "small berry or cream accent on top",
+      "dreamy affectionate face"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real mont blanc dessert, elegant and cute, luxury Korean bakery branding, warm ivory and chestnut cream palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Show the chestnut cream swirl identity with soft romantic charm and cozy sweetness.",
+      "rare": "Add one or two premium adornments such as a berry jewel garnish or ribbon-like cream accent.",
+      "superRare": "Make it a couture mont blanc with two or three premium adornments, luminous cream sparkle, and visible boutique glow."
+    }
+  },
+  {
+    "slug": "strawberry-shortcake-enfj",
+    "nameKo": "딸기 쇼트케이크",
+    "mbti": "ENFJ",
+    "archetype": "분위기를 정리하는 호스트형",
+    "traits": ["warm", "balanced", "welcoming", "graceful"],
+    "visualNotes": [
+      "layered shortcake slice or round shortcake silhouette",
+      "white cream layers and fresh strawberry topping",
+      "neat ribbon-like cream piping",
+      "bright welcoming face and open pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real strawberry shortcake, elegant and cute, luxury Korean bakery branding, warm ivory and berry cream palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the strawberry shortcake identity balanced, neat, and warmly welcoming.",
+      "rare": "Add one or two premium adornments such as refined cream rosettes or a host-style crown garnish.",
+      "superRare": "Make it a flagship celebration shortcake with two or three couture adornments, radiant berry sparkle, and visible luxury party lighting."
+    }
+  },
+  {
+    "slug": "opera-cake-entj",
+    "nameKo": "오페라 케이크",
+    "mbti": "ENTJ",
+    "archetype": "판을 설계하는 총괄 셰프형",
+    "traits": ["commanding", "precise", "bold", "organized"],
+    "visualNotes": [
+      "precise layered opera cake rectangle silhouette",
+      "clean chocolate glaze top and defined layers",
+      "gold line accent or polished garnish",
+      "confident but friendly face"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real opera cake, elegant and cute, luxury Korean bakery branding, warm ivory and espresso chocolate palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the opera cake geometry crisp and refined with clear premium structure.",
+      "rare": "Add one or two premium adornments such as gold-line garnish or executive pastry seal detail.",
+      "superRare": "Make it a commanding flagship opera cake with two or three couture adornments, collector-grade highlights, and visible prestige lighting."
+    }
+  },
+  {
+    "slug": "pretzel-estj",
+    "nameKo": "프레첼",
+    "mbti": "ESTJ",
+    "archetype": "질서를 맛있게 완성하는 실전형",
+    "traits": ["responsible", "clear", "strong", "efficient"],
+    "visualNotes": [
+      "classic pretzel knot silhouette",
+      "deep brown crust with salt crystals",
+      "clean strong symmetry",
+      "confident but kind face"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real pretzel, elegant and cute, luxury Korean bakery branding, warm ivory and baked brown palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the pretzel knot clear, sturdy, and premium with classic salt detail.",
+      "rare": "Add one or two premium adornments such as artisan salt jewel garnish or tailored bakery badge detail.",
+      "superRare": "Make it a prestige pretzel with two or three couture adornments, radiant crust sparkle, and visible flagship bakery lighting."
+    }
+  },
+  {
+    "slug": "shanghai-buttertteok-isfj",
+    "nameKo": "상하이 버터떡",
+    "mbti": "ISFJ",
+    "archetype": "익숙해서 더 자주 생각나는 포근형",
+    "traits": ["warm", "loyal", "gentle", "comforting"],
+    "visualNotes": [
+      "small madeleine-like or mini loaf silhouette",
+      "golden butter-baked top with chewy dense interior feel",
+      "soft hybrid mood between butter cake and rice cake",
+      "sweet safe face with cozy pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real Shanghai buttertteok dessert, elegant and cute, luxury Korean bakery branding, warm ivory and butter cream palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the Shanghai buttertteok identity soft, golden, chewy, and comforting.",
+      "rare": "Add one or two premium adornments such as gentle ribbon wrapping or butter flower garnish.",
+      "superRare": "Make it a couture Shanghai buttertteok with two or three premium adornments, luxurious soft glow, and collector-style boutique lighting."
+    }
+  },
+  {
+    "slug": "fruit-tart-esfj",
+    "nameKo": "과일 타르트",
+    "mbti": "ESFJ",
+    "archetype": "모두가 좋아하는 웰컴 테이블형",
+    "traits": ["social", "cheerful", "polished", "caring"],
+    "visualNotes": [
+      "round or slice tart silhouette",
+      "neatly arranged fruit topping and glossy glaze",
+      "crisp tart shell and cream base",
+      "friendly bright face and welcoming pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real fruit tart, elegant and cute, luxury Korean bakery branding, warm ivory and fresh fruit palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the fruit tart colorful, neat, and highly welcoming with clean fruit arrangement.",
+      "rare": "Add one or two premium adornments such as refined fruit jewel garnish or boutique serving ribbon detail.",
+      "superRare": "Make it a flagship fruit tart with two or three couture adornments, radiant fruit sparkle, and visible prestige dessert lighting."
+    }
+  },
+  {
+    "slug": "macaron-tower-enfp",
+    "nameKo": "마카롱 타워",
+    "mbti": "ENFP",
+    "archetype": "시선을 모으는 페스티벌형",
+    "traits": ["playful", "bright", "festive", "expressive"],
+    "visualNotes": [
+      "stacked macaron tower silhouette",
+      "multiple pastel macarons with clean filling lines",
+      "ribbon or celebration detail",
+      "joyful charming face and lively pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real macaron tower, elegant and cute, luxury Korean bakery branding, warm ivory and pastel confection palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the macaron tower identity vibrant, joyful, and clearly stacked with premium pastel polish.",
+      "rare": "Add one or two premium adornments such as celebration ribbon or boutique sugar garnish.",
+      "superRare": "Make it a luxury festival macaron tower with two or three couture adornments, radiant sparkle, and unmistakable boutique glow."
+    }
+  },
+  {
+    "slug": "churros-estp",
+    "nameKo": "츄러스",
+    "mbti": "ESTP",
+    "archetype": "지금 가장 맛있는 순간형",
+    "traits": ["bold", "quick", "fun", "energetic"],
+    "visualNotes": [
+      "long twisted churros stick silhouette",
+      "cinnamon sugar coating and crisp ridges",
+      "dynamic diagonal pose",
+      "playful excited face, never aggressive"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real churros dessert, elegant and cute, luxury Korean bakery branding, warm ivory and cinnamon sugar palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the churros identity dynamic and crisp with cinnamon sugar charm.",
+      "rare": "Add one or two premium adornments such as refined sugar sparkle or luxury dipping garnish detail.",
+      "superRare": "Make it a flagship churros collectible with two or three couture adornments, premium sparkle, and radiant luxury presentation."
+    }
+  },
+  {
+    "slug": "peach-danish-isfp",
+    "nameKo": "복숭아 데니시",
+    "mbti": "ISFP",
+    "archetype": "취향을 조용히 보여주는 살롱형",
+    "traits": ["artful", "soft", "sensitive", "tasteful"],
+    "visualNotes": [
+      "open peach danish silhouette",
+      "soft peach slices and glossy fruit finish",
+      "laminated pastry base with delicate curves",
+      "gentle tasteful face and graceful pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real peach danish, elegant and cute, luxury Korean bakery branding, warm ivory and peach cream palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the peach danish identity delicate, glossy, and tastefully soft.",
+      "rare": "Add one or two premium adornments such as peach leaf jewel garnish or ribbon-like cream detail.",
+      "superRare": "Make it a luxury salon peach danish with two or three couture adornments, luminous fruit glow, and visible prestige lighting."
+    }
+  },
+  {
+    "slug": "cream-puff-esfp",
+    "nameKo": "슈크림 퍼프",
+    "mbti": "ESFP",
+    "archetype": "만나면 기분이 환해지는 쇼케이스형",
+    "traits": ["bright", "friendly", "sweet", "expressive"],
+    "visualNotes": [
+      "round cream puff silhouette",
+      "light golden choux shell with cream filling feel",
+      "powdered sugar or cream accent",
+      "happy lovable face and welcoming pose"
+    ],
+    "promptBase": "Premium bakery mascot character made from a real cream puff dessert, elegant and cute, luxury Korean bakery branding, warm ivory and cream caramel palette, soft studio lighting, refined packaging mood, clean silhouette, mobile-friendly, no text, transparent background.",
+    "rarityPrompts": {
+      "common": "Keep the cream puff identity soft, bright, and highly lovable with clean pastry charm.",
+      "rare": "Add one or two premium adornments such as refined cream rosette or boutique sugar garnish.",
+      "superRare": "Make it a collector-level cream puff with two or three couture adornments, radiant sugar sparkle, and visible luxury showcase lighting."
+    }
+  }
+]

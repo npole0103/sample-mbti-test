@@ -22,10 +22,10 @@ export async function generateMetadata({ params }: ResultPageProps): Promise<Met
   }
 
   return {
-    title: `${result.name} · ${result.subtitle}`,
+    title: `${result.name} | ${result.subtitle}`,
     description: `${result.summary} ${result.description}`,
     openGraph: {
-      title: `${result.name} · ${result.subtitle}`,
+      title: `${result.name} | ${result.subtitle}`,
       description: result.summary
     }
   };
@@ -43,7 +43,7 @@ export default async function ResultPage({ params }: ResultPageProps) {
     <main className="result-page">
       <div className="result-page-header">
         <Link className="mini-link" href="/">
-          ← 홈으로
+          메인 쇼윈도로 돌아가기
         </Link>
       </div>
       <ResultDetails result={result} />
