@@ -66,8 +66,9 @@ export function ResultDetails({ result }: ResultDetailsProps) {
       </section>
 
       <ShareActions
+        highlights={result.strengths}
         title={`${result.name} · ${result.subtitle}`}
-        text={`나는 ${result.name}이래. ${result.summary}`}
+        text={`나는 ${result.name}래. ${result.summary}`}
       />
 
       <div className="result-footer">

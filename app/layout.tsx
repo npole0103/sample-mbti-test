@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { siteConfig } from "@/data/site";
@@ -23,6 +23,14 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description
   }
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+  themeColor: "#fef8f1"
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

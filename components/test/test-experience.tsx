@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import { questions, type Trait } from "@/data/questions";
 import { getResultFromAnswers } from "@/lib/scoring";
@@ -12,11 +12,18 @@ export function TestExperience() {
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Trait[]>([]);
+  const [isAdvancing, setIsAdvancing] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const unlockTimerRef = useRef<number | null>(null);
 
   const question = questions[index];
 
   const handleSelect = (trait: Trait) => {
+    if (isAdvancing || isPending) {
+      return;
+    }
+
+    setIsAdvancing(true);
     const nextAnswers = [...answers, trait];
     setAnswers(nextAnswers);
 
@@ -29,12 +36,23 @@ export function TestExperience() {
     }
 
     setIndex((current) => current + 1);
+    unlockTimerRef.current = window.setTimeout(() => {
+      setIsAdvancing(false);
+    }, 320);
   };
+
+  useEffect(() => {
+    return () => {
+      if (unlockTimerRef.current !== null) {
+        window.clearTimeout(unlockTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="test-shell">
       <ProgressBar current={index + 1} total={questions.length} />
-      <QuestionCard question={question} onSelect={handleSelect} />
+      <QuestionCard disabled={isAdvancing || isPending} question={question} onSelect={handleSelect} />
       <p className="micro-copy">
         질문 중 광고는 넣지 않았어요. 흐름에만 집중해서 빠르게 끝낼 수 있게 구성했습니다.
       </p>
