@@ -3,16 +3,17 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 
-import { questions, type Trait } from "@/data/questions";
-import { getResultFromAnswers } from "@/lib/scoring";
 import { ProgressBar } from "@/components/test/progress-bar";
 import { QuestionCard } from "@/components/test/question-card";
+import { questions, type Trait } from "@/data/questions";
+import { pickRarity } from "@/lib/rarity";
+import { getResultFromAnswers } from "@/lib/scoring";
 
 const chapterLabels = [
-  { until: 6, label: "오븐 예열" },
-  { until: 12, label: "반죽 정리" },
-  { until: 18, label: "굽는 중" },
-  { until: 24, label: "쇼윈도 포장" }
+  { until: 6, label: "첫 반죽의 온도" },
+  { until: 12, label: "마음이 부푸는 시간" },
+  { until: 18, label: "사르르 향이 깊어지는 중" },
+  { until: 24, label: "쇼윈도에 진열 완료" }
 ];
 
 export function TestExperience() {
@@ -25,7 +26,7 @@ export function TestExperience() {
 
   const question = questions[index];
   const currentQuestion = index + 1;
-  const chapter = chapterLabels.find((item) => currentQuestion <= item.until)?.label ?? "완성";
+  const chapter = chapterLabels.find((item) => currentQuestion <= item.until)?.label ?? "갓 구워짐";
 
   const handleSelect = (trait: Trait) => {
     if (isAdvancing || isPending) {
@@ -38,8 +39,9 @@ export function TestExperience() {
 
     if (index === questions.length - 1) {
       const result = getResultFromAnswers(nextAnswers);
+      const rarity = pickRarity();
       startTransition(() => {
-        router.push(`/result/${result.slug}`);
+        router.push(`/result/${result.slug}?rarity=${rarity}`);
       });
       return;
     }
@@ -64,10 +66,10 @@ export function TestExperience() {
       <ProgressBar current={currentQuestion} total={questions.length} />
       <QuestionCard disabled={isAdvancing || isPending} question={question} onSelect={handleSelect} />
       <p className="micro-copy">
-        질문을 푸는 동안에는 광고가 노출되지 않아요. 흐름이 끊기지 않도록 가볍고 빠른 모바일
-        경험에 집중했습니다.
+        질문을 푸는 동안에는 광고 없이, 오직 테스트 흐름에만 집중할 수 있도록 가볍고 빠르게
+        구성했어요.
       </p>
-      {isPending ? <p className="micro-copy">결과 카드를 쇼윈도에 올리는 중이에요...</p> : null}
+      {isPending ? <p className="micro-copy">결과 카드를 오븐에서 꺼내는 중이에요...</p> : null}
     </div>
   );
 }

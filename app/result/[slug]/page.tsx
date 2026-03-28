@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 
 import { ResultDetails } from "@/components/result/result-details";
 import { dessertResultMap, dessertResults } from "@/data/results";
+import { parseRarity } from "@/lib/rarity";
 
 type ResultPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ rarity?: string | string[] }>;
 };
 
 export async function generateStaticParams() {
@@ -31,9 +33,11 @@ export async function generateMetadata({ params }: ResultPageProps): Promise<Met
   };
 }
 
-export default async function ResultPage({ params }: ResultPageProps) {
+export default async function ResultPage({ params, searchParams }: ResultPageProps) {
   const { slug } = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const result = dessertResultMap[slug];
+  const rarity = parseRarity(resolvedSearchParams?.rarity) ?? "common";
 
   if (!result) {
     notFound();
@@ -43,10 +47,10 @@ export default async function ResultPage({ params }: ResultPageProps) {
     <main className="result-page">
       <div className="result-page-header">
         <Link className="mini-link" href="/">
-          메인 쇼윈도로 돌아가기
+          메인 화면으로 돌아가기
         </Link>
       </div>
-      <ResultDetails result={result} />
+      <ResultDetails rarity={rarity} result={result} />
     </main>
   );
 }

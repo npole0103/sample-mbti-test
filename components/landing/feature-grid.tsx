@@ -1,15 +1,21 @@
 const features = [
   {
-    title: "스토리처럼 흐르는 질문",
-    body: "연애의 장면을 따라가듯 24문항이 이어져서, 테스트를 푼다기보다 한 편의 쇼윈도 무드를 지나가는 느낌으로 설계했어요."
+    eyebrow: "Step 1",
+    title: "베이커리 카운터처럼 가볍고 귀엽게",
+    body:
+      "질문 화면은 군더더기 없이 깔끔하게, 대신 버터빛 컬러와 포근한 카드 질감으로 디저트 가게에 들어온 듯한 분위기를 담았어요."
   },
   {
-    title: "베이커리 세계관 결과 카드",
-    body: "사워도우 로프부터 두쫀쿠, 버터떡까지. 16가지 디저트를 하나의 브랜드 컬렉션처럼 정리해 결과 화면의 완성도를 높였어요."
+    eyebrow: "Step 2",
+    title: "결과는 수집하고 싶은 카드처럼",
+    body:
+      "16가지 결과를 카드 컬렉션처럼 보여줘서 한 번 보고 끝나는 테스트보다 저장하고 공유하고 싶은 감성을 더했어요."
   },
   {
-    title: "공유하기 좋은 모바일 화면",
-    body: "결과 카드 핵심 문구와 맛 노트를 모바일에서 한눈에 읽히게 배치했고, 질문 플로우에는 광고 없이 빠르게 몰입할 수 있게 구성했어요."
+    eyebrow: "Step 3",
+    title: "10대와 20대가 좋아할 말랑한 무드",
+    body:
+      "크림 베이지, 카라멜 브라운, 살구빛 포인트를 섞어 귀엽지만 유치하지 않은 카페 무드로 전체 화면을 연결했어요."
   }
 ];
 
@@ -18,7 +24,7 @@ export function FeatureGrid() {
     <section className="feature-grid" id="how-it-works">
       {features.map((feature) => (
         <article className="feature-card" key={feature.title}>
-          <p className="eyebrow">Signature Point</p>
+          <p className="eyebrow">{feature.eyebrow}</p>
           <h2>{feature.title}</h2>
           <p>{feature.body}</p>
         </article>

@@ -33,9 +33,10 @@ export function QuestionCard({ question, onSelect, disabled = false }: QuestionC
 
   return (
     <section className="question-card">
+      <div className="question-card__badge">Fresh question</div>
       <p className="eyebrow">Question {question.id}</p>
       <h1>{question.prompt}</h1>
-      <p className="question-note">지금 가장 자연스럽게 느껴지는 쪽을 골라주세요.</p>
+      <p className="question-note">지금 마음에 더 자연스럽게 끌리는 쪽을 가볍게 골라주세요.</p>
       <div className="option-stack">
         {question.options.map((option, optionIndex) => (
           <button
@@ -43,7 +44,6 @@ export function QuestionCard({ question, onSelect, disabled = false }: QuestionC
             disabled={disabled}
             key={`${question.id}-${option.trait}`}
             onClick={() => triggerSelect(option.trait)}
-            onTouchEnd={() => triggerSelect(option.trait)}
             onPointerUp={() => triggerSelect(option.trait)}
             type="button"
           >

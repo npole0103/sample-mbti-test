@@ -7,9 +7,10 @@ type ShareActionsProps = {
   title: string;
   text: string;
   highlights: string[];
+  rarityLabel: string;
 };
 
-export function ShareActions({ title, text, highlights }: ShareActionsProps) {
+export function ShareActions({ title, text, highlights, rarityLabel }: ShareActionsProps) {
   const [status, setStatus] = useState("");
 
   const fallbackCopy = (value: string) => {
@@ -66,6 +67,7 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
       return null;
     }
 
+    const mainPageUrl = new URL("/", window.location.origin).toString();
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     gradient.addColorStop(0, "#fff8ef");
     gradient.addColorStop(1, "#f7ead8");
@@ -89,6 +91,9 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     ctx.fillStyle = "#b87444";
     ctx.font = "700 30px Pretendard, Apple SD Gothic Neo, sans-serif";
     ctx.fillText("Maison Butter Atelier", contentX, currentY);
+    ctx.fillStyle = "#7d5338";
+    ctx.font = "700 26px Pretendard, Apple SD Gothic Neo, sans-serif";
+    ctx.fillText(`${rarityLabel} 카드`, contentX + 420, currentY);
 
     currentY += 92;
     ctx.fillStyle = "#3e2b21";
@@ -115,9 +120,10 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
 
     const qrSize = 200;
     const qrX = cardX + cardW - qrSize - 70;
-    const qrY = cardY + cardH - qrSize - 70;
+    const qrY = cardY + cardH - qrSize - 86;
+
     try {
-      const qrDataUrl = await QRCode.toDataURL(window.location.href, {
+      const qrDataUrl = await QRCode.toDataURL(mainPageUrl, {
         width: qrSize,
         margin: 1,
         color: {
@@ -142,7 +148,11 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
 
     ctx.fillStyle = "#7b6356";
     ctx.font = "500 24px Pretendard, Apple SD Gothic Neo, sans-serif";
-    wrapText(ctx, window.location.href, contentX, cardY + cardH - 84, contentWidth - 260, 34);
+    ctx.fillText("QR을 찍고 메인에서 테스트하기", qrX - 28, qrY + qrSize + 44);
+
+    ctx.fillStyle = "#7b6356";
+    ctx.font = "500 24px Pretendard, Apple SD Gothic Neo, sans-serif";
+    wrapText(ctx, mainPageUrl, contentX, cardY + cardH - 84, contentWidth - 260, 34);
 
     return await new Promise<Blob | null>((resolve) => {
       canvas.toBlob((blob) => resolve(blob), "image/png");
@@ -158,7 +168,7 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
         const payload = { title, text, url: shareUrl };
         if (!navigator.canShare || navigator.canShare(payload)) {
           await navigator.share(payload);
-          setStatus("공유 시트가 열렸어요.");
+          setStatus("결과 문구 공유 창을 열었어요.");
           return;
         }
       }
@@ -176,31 +186,20 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
     } catch (error) {
       const shareError = error as DOMException;
       if (shareError?.name === "AbortError") {
-        setStatus("공유를 취소했어요.");
+        setStatus("문구 공유를 취소했어요.");
         return;
       }
     }
 
     window.prompt("아래 내용을 복사해서 공유해 주세요.", shareText);
-    setStatus("자동 복사가 어려워서 수동 복사 창을 열어두었어요.");
+    setStatus("자동 복사가 어려워서 수동 복사 창을 열었어요.");
   };
 
-  const handleImageShare = async () => {
+  const handleImageDownload = async () => {
     try {
       const blob = await createShareImageBlob();
       if (!blob) {
         setStatus("이미지 생성에 실패했어요. 잠시 후 다시 시도해 주세요.");
-        return;
-      }
-
-      const file = new File([blob], "maison-butter-result.png", { type: "image/png" });
-      if (navigator.share && navigator.canShare?.({ files: [file] })) {
-        await navigator.share({
-          title: "메종 버터 테스트 결과",
-          text: title,
-          files: [file]
-        });
-        setStatus("결과 이미지를 공유했어요.");
         return;
       }
 
@@ -212,15 +211,9 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      setStatus("이미지를 저장했어요. 갤러리에서 공유해 주세요.");
-    } catch (error) {
-      const shareError = error as DOMException;
-      if (shareError?.name === "AbortError") {
-        setStatus("이미지 공유를 취소했어요.");
-        return;
-      }
-
-      setStatus("이미지 공유 중 오류가 발생했어요.");
+      setStatus("결과 카드를 이미지로 저장했어요.");
+    } catch {
+      setStatus("이미지 저장 중 오류가 발생했어요.");
     }
   };
 
@@ -230,12 +223,12 @@ export function ShareActions({ title, text, highlights }: ShareActionsProps) {
         <button className="primary-button" onClick={handleTextShare} type="button">
           결과 문구 공유
         </button>
-        <button className="secondary-button" onClick={handleImageShare} type="button">
-          결과 카드 저장
+        <button className="secondary-button" onClick={handleImageDownload} type="button">
+          결과 카드 이미지 저장
         </button>
       </div>
       <p className="share-status" role="status">
-        {status || "기본 공유 시트와 이미지 저장 기능을 준비해두었어요."}
+        {status || "문구 공유와 메인 QR이 포함된 결과 카드 저장 기능을 준비해 두었어요."}
       </p>
     </div>
   );
