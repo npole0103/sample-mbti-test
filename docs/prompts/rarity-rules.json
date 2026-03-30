@@ -1,0 +1,31 @@
+{
+  "common": {
+    "label": "Common",
+    "rules": [
+      "Keep the dessert identity clean and immediately readable.",
+      "Use little to no luxury effect.",
+      "Keep adornments minimal and functional.",
+      "Focus on the base pastry shape, core filling, and a simple mascot expression.",
+      "The mascot must feel adorable, friendly, lovable, and charming.",
+      "Never make the character scary, creepy, uncanny, sinister, aggressive, or unsettling."
+    ]
+  },
+  "rare": {
+    "label": "Rare",
+    "rules": [
+      "Add one or two premium adornments that suit the dessert and the MBTI personality.",
+      "A subtle effect is allowed, but it must remain restrained and secondary.",
+      "The character should feel more styled and premium than common.",
+      "Pose or expression can be slightly more confident, charming, or polished than common."
+    ]
+  },
+  "superRare": {
+    "label": "Super Rare",
+    "rules": [
+      "Add two or three premium adornments that suit the dessert and the MBTI personality.",
+      "Visible luxury rarity effects are required, such as glow, sparkle, luminous highlight, prestige lighting, or collector-style presentation.",
+      "The character must feel clearly more radiant, luxurious, and rare than the rare version.",
+      "Use a more elevated expression or flagship pose so the character looks scarce and high-end."
+    ]
+  }
+}
