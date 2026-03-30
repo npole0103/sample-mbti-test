@@ -1,42 +1,63 @@
 # Main Page Figma Wireframe
 
-이 문서는 `내 연애 무드는 어떤 디저트일까?` 메인 페이지를 Figma에서 새로 구성할 때 바로 옮겨 그릴 수 있도록 만든 와이어프레임 스펙이다.
+이 문서는 현재 서비스의 메인 페이지 UI/UX 상태를 기준으로, Figma Make에서 그대로 재현하거나 다듬기 쉽게 만든 메인 페이지 와이어프레임 가이드다.
 
-## 1. Design Intent
+핵심 방향:
+- 베이커리 부티크 무드
+- 부드럽고 고급스러운 종이 카드 질감
+- 모바일 우선
+- 메인 구조는 단순하지만, 결과 카드가 다양하다는 기대감을 슬라이딩 카드에서 보여준다
 
-- 첫 화면의 역할은 설명이 아니라 `검사를 시작하게 만드는 쇼윈도`다.
-- 정보량은 줄이고, 큰 디저트 비주얼과 강한 CTA에 시선을 모은다.
-- 레퍼런스는 베이커리 앱 UI, 패키지 카드, 카페 쇼윈도, 리본 라벨 감성 쪽으로 잡는다.
-- 결과 카드가 다양하다는 느낌은 마키 섹션에서 보여주고, 첫 스크린에서는 한 장의 대표 비주얼만 강하게 쓴다.
+## 1. 현재 메인 구조
 
-## 2. Visual Direction
+현재 메인 페이지는 아래 4개 구역으로 구성된다.
+
+1. 상단 헤더
+2. 메인 헤드라인 카드
+3. 슬라이딩 디저트 카드 섹션
+4. 설명 + CTA 카드 섹션
+5. 푸터
+
+즉 Figma Make에서는 예전처럼 하나의 히어로 카드 안에 모든 내용을 넣지 말고, 아래 흐름으로 분리해서 구성해야 한다.
+
+1. `내 연애 무드는 어떤 디저트일까?`
+2. 슬라이딩 카드
+3. `24문항에 답하면...` + `테스트 시작하기`
+
+## 2. Design Intent
+
+- 첫 화면에서 바로 서비스 주제를 이해하게 만든다.
+- 헤드라인은 감성적으로, 아래 설명은 차분하고 읽기 쉽게 분리한다.
+- 결과가 다양하다는 느낌은 슬라이딩 카드 섹션에서 전달한다.
+- CTA는 별도 카드로 내려서 사용자가 내용을 읽고 자연스럽게 테스트를 시작하게 만든다.
+
+## 3. Visual Direction
 
 ### Tone
 
-- 키워드: `Bakery boutique`, `soft premium`, `cute but editorial`, `mobile-first`
-- 무드: 베이지 쇼룸 + 카라멜 포인트 + 크림 하이라이트
-- 텍스처: 유리 패널, 종이 라벨, 패키지 스티커, 둥근 리본
+- 키워드: `bakery boutique`, `soft premium`, `cute editorial`, `warm paper UI`
+- 전체 무드: 크림색 종이 위에 카라멜 브라운 포인트
+- 느낌: 고급 디저트 박스, 메뉴 카드, 라벨 스티커, 부드러운 그림자
 
 ### Color
 
 - Background: `#FBF1E4`
 - Background Soft: `#FFF8F1`
-- Paper: `rgba(255, 250, 244, 0.88)`
+- Paper Card: `rgba(255, 250, 244, 0.88)`
 - Ink: `#3F281C`
-- Muted Brown: `#775B49`
+- Muted Text: `#775B49`
 - Caramel Accent: `#C67A47`
 - Deep Caramel: `#97542F`
 - Cream Highlight: `#FFF2DF`
-- Berry Accent: `#DE9B8B`
 
 ### Typography
 
-- Headline: serif 계열, 둥글고 살짝 에디토리얼한 느낌
-- Body: 한국어 가독성이 좋은 sans-serif
-- 숫자, badge, label: medium~bold sans-serif
-- 원칙: 문장 길이는 짧게, 행간은 넉넉하게, 히어로 텍스트는 크게
+- Display: 클래식 세리프 계열
+- Body: 깔끔한 한글 산세리프
+- 헤드라인은 크지만 과하지 않게, 모바일에서 2줄 또는 3줄 이내 유지
+- 설명문은 너무 연하지 않게 동일한 muted brown 톤으로 맞춘다
 
-## 3. Frame Setup
+## 4. Frame Setup
 
 ### Desktop
 
@@ -45,287 +66,224 @@
 - Grid: `12 columns`
 - Margin: `160`
 - Gutter: `24`
-- Section spacing: `24`
 
 ### Mobile
 
-- Base frame width: `390`
+- Frame width: `390`
 - Safe content width: `358`
 - Side padding: `16`
-- Section spacing: `16`
-- 하단 CTA 고정 영역 여유: `88`
+- Section spacing: `10 ~ 16`
 
-## 4. Page Structure
-
-순서:
-
-1. Hero
-2. Dessert Marquee
-3. Why This Test / Feature blocks
-4. Bottom CTA
-
-## 5. Hero Section
+## 5. Header
 
 ### 역할
 
-- 브랜드 무드 전달
-- 테스트 핵심 정보 압축
-- 첫 CTA 클릭 유도
-
-### Desktop Layout
-
-- Section container: `1120 x 620`
-- 2-column split
-- Left column: `520`
-- Right column: `520`
-- Column gap: `32`
-
-### Mobile Layout
-
-- Section container: `358 x auto`
-- Vertical stack
-- 순서:
-  1. Top label row
-  2. Main copy
-  3. CTA
-  4. Meta chips
-  5. Hero visual
-
-### Hero Container Style
-
-- Fill: `Paper`
-- Radius: `34`
-- Stroke: `1px rgba(111, 76, 53, 0.14)`
-- Shadow: soft, large blur
-- 내부 패딩
-  - Desktop: `34 / 30`
-  - Mobile: `28 / 22`
-
-### Left Column Content
-
-#### Top Bar
-
-- Height: `36`
-- 좌측: 로고 또는 워드마크
-- 우측: small stamp badge
-
-권장 텍스트:
-
-- 로고/브랜드: `Dessert Mood Lab`
-- stamp badge: `24문항 · 3분 내외`
-
-#### Main Copy Group
-
-- Eyebrow: `Bakery Mood Test`
-- Headline:
-  `내 연애 무드는 어떤 디저트일까?`
-- Sub copy:
-  `가볍게 24문항에 답하면, 지금의 연애 텐션을 닮은 디저트 결과 카드가 나와요.`
-
-타이포 권장:
-
-- Headline size
-  - Desktop: `56~72`
-  - Mobile: `40~48`
-- Sub copy
-  - Desktop: `18`
-  - Mobile: `16`
-
-#### CTA Row
-
-- Primary CTA: `테스트 시작하기`
-- Secondary CTA: `결과 카드 미리 보기`
-
-버튼 스타일:
-
-- Primary
-  - Height: `54`
-  - Horizontal padding: `22~28`
-  - Radius: `999`
-  - Fill: caramel gradient
-- Secondary
-  - Height: `54`
-  - Radius: `999`
-  - Ghost cream style
-
-#### Meta Chips
-
-- `24문항`
-- `결과 카드 제공`
-- `모바일 최적화`
-
-칩 스타일:
-
-- Height: `38~40`
-- Radius: `999`
-- Fill: white/cream
-- Text size: `14`
-
-### Right Column Visual
-
-핵심은 `베이커리 앱 + 패키지 카드 + 디저트 쇼윈도` 감성을 한 프레임 안에 응축하는 것이다.
-
-#### Visual Frame
-
-- Size: `520 x 520`
-- Radius: `34`
-- 내부 패딩: `22`
-- Fill:
-  - top: soft cream
-  - bottom: warm beige gradient
-- 내부에 얇은 이중 프레임 라인 추가
-
-#### Visual Composition
-
-- 중앙: 대표 디저트 오브젝트 1개 크게
-- 상단 좌측: small badge `Freshly baked mood`
-- 상단 우측: floating info card 1개
-- 하단 중앙: 리본형 label `Baked for Your Heart`
-- 좌하단/우하단: 작은 garnish shape 또는 둥근 재료 조형
-
-#### 대표 비주얼 규칙
-
-- 실사 디저트 또는 결과 카드 이미지를 크게 하나 사용
-- 비율은 카드보다 음식이 더 커 보이게
-- 오브젝트는 프레임 중앙에서 약간 아래쪽
-- 너무 많은 이미지 콜라주는 피하고, 첫 화면은 `1 hero object + 2 small accents` 정도로 제한
-
-## 6. Dessert Marquee Section
-
-### 역할
-
-- 결과 종류가 많다는 것을 보여준다
-- 클릭 유도는 하지 않고, 시각적으로 다양성만 전달한다
-
-### Section Header
-
-- Eyebrow: `Freshly Drawn Characters`
-- Heading:
-  `검사를 시작하면 여러 디저트 결과 카드 중 하나가 나와요`
-- Body:
-  `48장의 카드가 흐르지만 어떤 결과가 나올지는 아직 비밀이에요.`
+- 브랜드와 시작 CTA를 가장 상단에 고정형으로 노출
 
 ### Layout
 
-- Header block width: `680~760`
-- Marquee 영역은 full-bleed 느낌으로 content 밖으로 살짝 확장
-- Desktop section height: `340~380`
-- Mobile section height: `300~340`
+- Sticky rounded top bar
+- 좌측: `Dessert Mood Lab`
+- 우측: `24문항 · 3분 내외` + `시작하기`
 
-### Marquee Cards
+### Style
 
-- 총 48장 반복
+- 높이: `62 ~ 72`
+- 배경: 유리 같은 크림 화이트
+- Radius: `999`
+- 그림자: 부드럽고 넓게
+
+## 6. Hero Headline Card
+
+### 역할
+
+- 메인 카피만 강하게 전달
+- 디저트 카드 섹션 위에 브랜드 해시태그와 질문 한 줄을 배치
+
+### 포함 요소
+
+- 해시태그 칩 3개
+  - `#24문항`
+  - `#3분내외`
+  - `#나만의결과카드`
+- 메인 타이틀
+  - `내 연애 무드는`
+  - `어떤 디저트일까?`
+
+### Layout
+
+- 단일 카드
+- 내부 콘텐츠는 가운데 정렬
+- 카드 높이는 예전 풀 히어로보다 훨씬 짧아야 함
+- 현재 의도상 슬라이딩 카드가 바로 아래에서 보여야 하므로 세로 길이를 길게 잡지 않는다
+
+### Recommended Size
+
+- Desktop card min-height: `320 ~ 360`
+- Mobile card min-height: `220 ~ 260`
+
+### Style
+
+- Fill: `Paper Card`
+- Radius: `34 ~ 42`
+- Shadow: soft editorial shadow
+- 타이틀은 large serif
+- 칩은 작은 rounded pill
+
+## 7. Dessert Marquee Section
+
+### 역할
+
+- 결과 카드가 다양하다는 기대감을 보여주는 메인 인터랙션 섹션
+- 첫 진입 시 웹과 모바일에서 모두 일부 카드가 보여야 한다
+
+### Layout
+
+- Hero Headline Card 바로 아래
+- 별도 설명 카피 없이 카드 트랙 중심
+- full-bleed 느낌으로 좌우가 살짝 넓게 퍼져 보여도 됨
+
+### Card Rules
+
 - 카드 크기
   - Desktop: `194 x 252`
   - Mobile: `172 x 228`
 - Radius: `26`
-- 내부 이미지 프레임 radius: `22`
+- 이미지 프레임 Radius: `22`
 - 카드 간격: `16`
 
-### Motion Direction
+### Motion
 
-- 왼쪽에서 오른쪽이 아니라 `오른쪽에서 왼쪽`으로 천천히 지속 이동
-- 1 cycle 기준 `55~60초`
-- 사용자가 직접 조작하지 않음
+- 자동 슬라이딩
+- 속도는 느리게
+- 사용자가 조작하지 않아도 결과가 계속 지나가는 인상
 
-## 7. Feature Blocks
+### Content
+
+- 실제 디저트 이미지 카드 사용
+- 카드 하단에는 디저트명 + MBTI/rarity 표기
+- 이 섹션은 시각적으로 풍성해야 하지만, 전체 페이지보다 튀지는 않게 톤을 맞춘다
+
+## 8. CTA Description Card
 
 ### 역할
 
-- 테스트 경험을 3문장 안으로 설명
-- 진입 장벽을 낮추고 공유 동기를 만든다
+- 슬라이딩 카드 아래에서 테스트 내용을 정리
+- 사용자가 CTA를 누르기 직전 읽는 설명 구역
 
-### Recommended Content
+### 현재 포함 요소
 
-1. `가볍게 답하기`
-   `복잡한 해석 없이 A/B 선택만으로 빠르게 진행돼요.`
-2. `결과 카드 받기`
-   `내 무드와 닮은 디저트 캐릭터 카드를 바로 확인할 수 있어요.`
-3. `친구와 공유하기`
-   `저장하고 보내기 좋은 카드형 결과로 대화가 이어져요.`
+- 설명 2줄
+  - `24문항에 답하면 지금의 연애 텐션을 닮은 디저트 카드가 나와요.`
+  - `가볍게 시작하고, 결과는 오래 남게. 48종의 카드 중 어떤 분위기가 나올지는 아직 비밀이에요.`
+- CTA 버튼
+  - `테스트 시작하기`
 
 ### Layout
 
-- Desktop: 3 cards in one row
-- Mobile: 3 cards in one column
-- Card gap: `16`
-- Card min height: `196~220`
-- Radius: `24`
-- Padding: `22`
+- 별도 카드로 분리
+- 내부 콘텐츠는 가운데 정렬
+- 설명 문장은 같은 색상과 톤 유지
+- 각 문장 앞에는 작은 포인트 불릿 배치
 
-### Card Style
+### Style
 
-- 배경은 히어로보다 조금 더 단정한 paper tone
-- 우하단에는 연한 원형 glow 또는 스티커 포인트 1개만 사용
-- 텍스트는 3줄 이내로 정리
+- Hero 카드와 동일한 paper card 계열
+- 헤드라인 카드보다 더 낮고 압축적인 인상
+- CTA 버튼은 카라멜 그라데이션
 
-## 8. Bottom CTA
+### Recommended Size
 
-### 역할
+- Desktop max width: `720`
+- Mobile width: `100%`
 
-- 첫 스크린을 지나간 사용자에게 다시 한번 시작 버튼을 노출
+## 9. Start Modal
 
-### Desktop
+### Trigger
 
-- Wide panel 또는 centered button row
-- Section top spacing: `24`
-- Button height: `58`
+- 상단 헤더의 `시작하기`
+- CTA 카드의 `테스트 시작하기`
 
-### Mobile
+### Modal Copy
 
-- `하단 고정 CTA` 적극 사용
-- Safe area 포함 높이: `72~88`
-- 버튼 라벨: `지금 시작하기`
-- 보조 문구는 생략하거나 한 줄로 최소화
+- Title: `테스트를 시작할게요`
+- Body line 1: `24개의 질문에 솔직하게 답해 주세요.`
+- Body line 2: `지금의 연애 무드를 닮은 디저트 카드를 구워드릴게요.`
 
-## 9. Component Rules
+### Style
 
-### Buttons
+- 둥근 카드 모달
+- 상단에 `START` 배지
+- 본문은 두 줄이 확실히 구분되게 세로 배치
 
-- 모든 CTA는 radius `999`
-- Primary 버튼은 카라멜 그라데이션
-- hover는 살짝 lift
-- mobile은 최소 높이 `54`
+## 10. Footer
 
-### Chips / Labels
+### 구성
 
-- 둥근 라벨형
-- border는 얇고 채도 낮게
-- 텍스트는 uppercase 또는 짧은 명사형
+- Brand: `Dessert Mood Lab`
+- Copy: `© 2026 Dessert Mood Lab · 내 연애 무드는 어떤 디저트일까?`
+- Tag: `Baked for Your Heart`
 
-### Image Handling
+### Style
 
-- 이미지 비중을 크게 가져간다
-- 너무 많은 텍스트가 이미지 영역을 침범하지 않게 한다
-- 대표 컷은 한 개만 크게, 나머지는 작은 카드나 장식으로 분산
+- 중앙 정렬
+- 상단 보더 1줄
+- 본문보다 가볍고 정리된 느낌
 
-## 10. Figma Layer Naming
+## 11. Component Mapping For Figma Make
+
+현재 코드 구조 기준으로 Figma Make에서 아래 컴포넌트 단위로 생각하면 된다.
+
+- `Header / Topbar`
+- `Hero / Headline Card`
+- `Marquee / Dessert Track`
+- `CTA / Description Card`
+- `Modal / Start Test`
+- `Footer / Brand`
+
+## 12. Suggested Figma Layer Names
 
 - `Home / Desktop / 1440`
 - `Home / Mobile / 390`
-- `Hero / Copy`
-- `Hero / Visual`
+- `Header / Topbar`
+- `Hero / Headline`
+- `Hero / Chips`
 - `Marquee / Track`
-- `Feature / Card 01`
-- `Feature / Card 02`
-- `Feature / Card 03`
-- `CTA / Sticky Mobile`
+- `Marquee / Card`
+- `CTA / Description`
+- `CTA / Button`
+- `Modal / Start`
+- `Footer / Brand`
 
-## 11. Suggested First Figma Build Order
+## 13. Figma Make Prompt Seed
 
-1. Desktop frame 1440 생성
-2. 12-column grid 적용
-3. Hero 카드 먼저 완성
-4. Hero 비주얼 안에 대표 디저트 이미지와 ribbon label 배치
-5. Marquee 카드 6장만 먼저 샘플로 배치
-6. Feature card 3개 배치
-7. Mobile frame 390으로 재구성
-8. 마지막에 sticky CTA 추가
+아래 문구를 Figma Make 시작 프롬프트로 바로 사용할 수 있다.
 
-## 12. Notes For The Next Step
+```text
+Create a mobile-first premium bakery-themed landing page for a Korean MBTI-style dessert test.
 
-다음 단계에서는 이 문서를 기준으로 아래 중 하나로 바로 이어가면 된다.
+Structure:
+1. Sticky rounded header with brand on the left and a start button on the right
+2. A short hero headline card with three hashtag chips (#24문항, #3분내외, #나만의결과카드) and the main title "내 연애 무드는 어떤 디저트일까?"
+3. A horizontal sliding dessert card section directly below the headline so users can see result cards immediately on first screen
+4. A separate CTA description card below the sliding cards with two bullet-like lines of text and a caramel gradient start button
+5. A soft premium footer
 
-- 메인 페이지 `low-fi wireframe` 좌표 단위 상세화
-- 메인 페이지 `mid-fi` 컴포넌트 스펙화
-- 테스트 페이지와 결과 페이지를 동일 톤으로 확장
+Style:
+- Warm ivory paper card background
+- Caramel brown typography
+- Elegant serif headline, clean Korean sans body
+- Soft premium bakery boutique mood
+- Rounded cards, soft shadows, refined spacing
+- Mobile-first layout but scalable to desktop
+
+Do not combine the hero headline and the CTA description into one card. Keep them as two separate sections with the marquee in between.
+```
+
+## 14. Next Step
+
+이 문서를 기준으로 바로 이어갈 수 있는 작업:
+
+1. Figma Make로 메인 페이지 시안 생성
+2. 생성된 시안에서 spacing, card height, chip arrangement 조정
+3. 그 다음 테스트 페이지와 결과 페이지 와이어프레임 확장

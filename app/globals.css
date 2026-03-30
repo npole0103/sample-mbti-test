@@ -69,7 +69,7 @@ button {
 
 .page-shell {
   display: grid;
-  gap: 18px;
+  gap: 10px;
 }
 
 .hero-card,
@@ -285,8 +285,9 @@ h2 {
 }
 
 .hero-card--editorial {
-  min-height: 704px;
-  padding: 38px;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 500px;
+  padding: 30px 34px 22px;
   border-radius: 42px;
   background:
     linear-gradient(180deg, rgba(255, 252, 246, 0.95), rgba(253, 246, 236, 0.88)),
@@ -294,19 +295,38 @@ h2 {
   box-shadow: 0 36px 60px rgba(124, 90, 61, 0.14);
 }
 
+.hero-card--headline {
+  min-height: 340px;
+  padding-bottom: 18px;
+}
+
+.hero-card--cta {
+  min-height: auto;
+  padding: 26px 34px 30px;
+}
+
 .hero-copy--editorial {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 22px 8px 22px 10px;
+  align-items: center;
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 16px 4px 10px;
+  text-align: center;
+}
+
+.hero-copy--cta {
+  width: min(100%, 720px);
 }
 
 .hero-copy__head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
 }
 
 .hero-brand-mark {
@@ -332,18 +352,47 @@ h2 {
 .hero-title {
   display: grid;
   gap: 6px;
-  margin-top: 14px;
+  max-width: 8.5ch;
+  margin-top: 4px;
   letter-spacing: -0.04em;
-  font-size: clamp(3rem, 7.4vw, 5.8rem);
-  line-height: 0.98;
+  font-size: clamp(2.45rem, 4.8vw, 4rem);
+  line-height: 1.03;
 }
 
 .hero-title span:first-of-type {
   color: #bf8759;
 }
 
+.hero-summary {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 38rem);
+  margin-top: 0;
+}
+
+.hero-summary__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.78;
+  text-align: left;
+}
+
+.hero-summary__bullet {
+  width: 10px;
+  height: 10px;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c88452, #a66338);
+  box-shadow: 0 0 0 4px rgba(200, 132, 82, 0.14);
+}
+
 .hero-actions--single {
-  margin-top: 34px;
+  margin-top: 24px;
 }
 
 .primary-button--compact {
@@ -517,7 +566,7 @@ h2 {
 .result-columns {
   display: grid;
   gap: 16px;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 .feature-card,
@@ -582,7 +631,7 @@ h2 {
   overflow: hidden;
   width: calc(100% + 36px);
   margin-left: -18px;
-  padding: 6px 0;
+  padding: 0 0 6px;
   pointer-events: none;
   touch-action: none;
   user-select: none;
@@ -1050,6 +1099,11 @@ h2 {
   line-height: 1.7;
 }
 
+.start-modal__copy {
+  display: grid;
+  gap: 4px;
+}
+
 .start-modal__actions {
   display: grid;
   gap: 12px;
@@ -1083,12 +1137,16 @@ h2 {
   .page-shell,
   .test-page,
   .result-page {
-    padding: 42px 28px 84px;
+    padding: 28px 28px 84px;
   }
 
   .hero-card,
   .result-banner {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  }
+
+  .hero-card--editorial {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .feature-grid,
@@ -1136,17 +1194,25 @@ h2 {
 
   .hero-card--editorial {
     min-height: auto;
-    padding: 22px 18px;
+    padding: 18px 18px 12px;
     border-radius: 30px;
   }
 
+  .hero-card--headline {
+    padding-bottom: 8px;
+  }
+
+  .hero-card--cta {
+    padding: 18px 18px 22px;
+  }
+
   .hero-copy--editorial {
-    padding: 6px 2px 0;
+    width: 100%;
+    padding: 8px 2px 2px;
   }
 
   .hero-copy__head {
-    flex-wrap: wrap;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   .hero-brand-mark {
@@ -1155,11 +1221,24 @@ h2 {
 
   .hero-title {
     gap: 2px;
-    font-size: clamp(2.8rem, 15vw, 4.2rem);
+    max-width: none;
+    font-size: clamp(2.2rem, 11.4vw, 3.45rem);
   }
 
-  .lead--hero {
-    font-size: 1rem;
+  .hero-summary {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .hero-summary__item {
+    gap: 10px;
+    font-size: 0.96rem;
+    line-height: 1.72;
+  }
+
+  .hero-summary__bullet {
+    width: 9px;
+    height: 9px;
   }
 
   .primary-button--hero {
@@ -1229,6 +1308,7 @@ h2 {
   .marquee-shell {
     width: calc(100% + 18px);
     margin-left: -9px;
+    padding-top: 0;
   }
 
   .marquee-card {

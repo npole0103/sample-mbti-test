@@ -23,9 +23,9 @@ const dessertNamesByMbti: Record<string, string> = {
   INTJ: "사워도우",
   INTP: "까눌레",
   INFJ: "라벤더 마들렌",
-  ISTJ: "우유식빵",
-  ENTP: "두바이 쿠키",
-  ISTP: "퀸아망",
+  ISTJ: "우유 식빵",
+  ENTP: "두바이쫀득쿠키",
+  ISTP: "쿠인아망",
   INFP: "몽블랑",
   ENFJ: "딸기 쇼트케이크",
   ENTJ: "오페라 케이크",
@@ -35,7 +35,7 @@ const dessertNamesByMbti: Record<string, string> = {
   ENFP: "마카롱 타워",
   ESTP: "츄러스",
   ISFP: "복숭아 데니시",
-  ESFP: "크림 퍼프"
+  ESFP: "슈크림 퍼프"
 };
 
 const cards = shuffleCards();
