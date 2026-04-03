@@ -1,37 +1,59 @@
+import type { ReactNode } from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { LandingHero } from "@/components/landing/landing-hero";
+import { LandingCtaPanel } from "@/components/landing/landing-cta-panel";
+import { LandingHeader } from "@/components/landing/landing-header";
+import { UiPreferencesProvider } from "@/components/providers/ui-preferences";
 import { QuestionCard } from "@/components/test/question-card";
 import { questions } from "@/data/questions";
 
+function renderWithProvider(node: ReactNode) {
+  return render(<UiPreferencesProvider>{node}</UiPreferencesProvider>);
+}
+
 afterEach(() => {
-  window.location.hash = "";
   cleanup();
 });
 
 describe("button QA coverage", () => {
-  it("wires the landing CTA links to the modal and test entry points", () => {
-    render(<LandingHero />);
+  it("wires the landing CTA buttons to the start handler", () => {
+    const handleStart = vi.fn();
 
-    const ctaLinks = screen.getAllByRole("link", { name: /^시작하기$/ });
-    expect(ctaLinks[0]).toHaveAttribute("href", "#start-modal");
-    expect(screen.getByRole("link", { name: /^테스트 시작하기$/ })).toHaveAttribute("href", "#start-modal");
-    expect(ctaLinks[1]).toHaveAttribute("href", "/test");
-    expect(screen.getByRole("link", { name: /나중에 하기/i })).toHaveAttribute("href", "#");
+    renderWithProvider(
+      <>
+        <LandingHeader onStart={handleStart} />
+        <LandingCtaPanel onStart={handleStart} />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /^시작하기$/ }));
+    fireEvent.click(screen.getByRole("button", { name: /^테스트 시작하기$/ }));
+
+    expect(handleStart).toHaveBeenCalledTimes(2);
   });
 
-  it("keeps landing CTA links touch-friendly", () => {
-    render(<LandingHero />);
+  it("keeps landing CTA buttons touch-friendly", () => {
+    const handleStart = vi.fn();
 
-    const topCta = screen.getAllByRole("link", { name: /^시작하기$/ })[0];
-    const closeLink = screen.getByRole("link", { name: /나중에 하기/i });
+    renderWithProvider(
+      <>
+        <LandingHeader onStart={handleStart} />
+        <LandingCtaPanel onStart={handleStart} />
+      </>
+    );
+
+    const topCta = screen.getByRole("button", { name: /^시작하기$/ });
+    const mainCta = screen.getByRole("button", { name: /^테스트 시작하기$/ });
 
     fireEvent.touchStart(topCta);
-    fireEvent.touchStart(closeLink);
+    fireEvent.touchStart(mainCta);
+    fireEvent.click(topCta);
+    fireEvent.click(mainCta);
 
-    expect(topCta).toHaveAttribute("href", "#start-modal");
-    expect(closeLink).toHaveAttribute("href", "#");
+    expect(topCta).toHaveAttribute("type", "button");
+    expect(mainCta).toHaveAttribute("type", "button");
+    expect(handleStart).toHaveBeenCalledTimes(2);
   });
 
   it("fires a question choice only once even if multiple input events occur", () => {

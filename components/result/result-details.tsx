@@ -1,9 +1,20 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
+import {
+  CakeSliceOrnament,
+  CoffeeOrnament,
+  CroissantOrnament,
+  HeartOrnament
+} from "@/components/landing/bakery-ornaments";
+import { useUiPreferences } from "@/components/providers/ui-preferences";
 import { ShareActions } from "@/components/result/share-actions";
 import { getResultImagePath } from "@/data/result-assets";
+import { resultUiCopy } from "@/data/result-ui-copy";
 import type { DessertResult } from "@/data/results";
 import { rarityMeta, type Rarity } from "@/lib/rarity";
 
@@ -12,9 +23,46 @@ type ResultDetailsProps = {
   rarity: Rarity;
 };
 
+const mbtiColors: Record<string, string> = {
+  INFP: "#FFB5A7",
+  ENFP: "#FCD5CE",
+  INFJ: "#F8EDEB",
+  ENFJ: "#F9E2E6",
+  INTJ: "#E8E8E4",
+  ENTJ: "#D8E2DC",
+  INTP: "#ECE4DB",
+  ENTP: "#FFE5D9",
+  ISFP: "#FFD7BA",
+  ESFP: "#FEC89A",
+  ISTP: "#E2ECE9",
+  ESTP: "#DFE7FD",
+  ISFJ: "#F0E6EF",
+  ESFJ: "#E0B1CB",
+  ISTJ: "#CDB4DB",
+  ESTJ: "#FFC8DD"
+};
+
 export function ResultDetails({ result, rarity }: ResultDetailsProps) {
-  const rarityInfo = rarityMeta[rarity];
+  const { lang, t, userName } = useUiPreferences();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   const imagePath = getResultImagePath(result, rarity);
+  const copy = resultUiCopy[result.slug];
+  const content = lang === "KOR" ? copy.ko : copy.en;
+  const displayUserName = useMemo(() => userName || t("나", "Me"), [t, userName]);
+  const rarityInfo = rarityMeta[rarity];
+  const rarityLabel =
+    lang === "KOR"
+      ? rarity === "common"
+        ? "노멀"
+        : rarity === "rare"
+          ? "레어"
+          : "유니크"
+      : rarity === "common"
+        ? "Normal"
+        : rarity === "rare"
+          ? "Rare"
+          : "Unique";
 
   const style = {
     "--accent": result.palette.accent,
@@ -24,109 +72,142 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
     "--rarity-accent": rarityInfo.accent
   } as CSSProperties;
 
-  return (
-    <article className={`result-card result-card--${rarity}`} style={style}>
-      <section className="result-banner">
-        <div className="result-badge">
-          <div className="result-badge__glow" />
-          {imagePath ? (
-            <Image
-              alt={`${result.name} ${rarityInfo.label} 캐릭터`}
-              className="result-badge__image"
-              fill
-              priority
-              sizes="(max-width: 767px) 100vw, 420px"
-              src={imagePath}
-            />
-          ) : null}
-          <div className="result-badge__meta">
-            <div className="result-badge__garnish">{result.icon.garnish}</div>
-            <div className="result-badge__label">{result.icon.badge}</div>
-          </div>
-        </div>
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoaded(true), 1600);
+    return () => window.clearTimeout(timer);
+  }, []);
 
-        <div className="result-banner__copy">
-          <p className="eyebrow">Result {result.mbti}</p>
-          <div className={`rarity-pill rarity-pill--${rarity}`}>{rarityInfo.label} 카드</div>
-          <h1>
-            {result.name} <span>{result.subtitle}</span>
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsRevealed(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isLoaded]);
+
+  if (!isLoaded) {
+    return (
+      <div className="result-loading-screen result-loading-screen--figma">
+        <CroissantOrnament className="result-loading-screen__icon" />
+        <p>{t("당신만의 특별한 베이커리 카드를 굽고 있어요...", "Baking your special bakery card...")}</p>
+      </div>
+    );
+  }
+
+  return (
+    <article className={`result-screen result-screen--figma ${isRevealed ? "is-revealed" : ""}`} style={style}>
+      <div className="result-screen__decor" aria-hidden="true">
+        <CoffeeOrnament className="result-screen__decor-1" />
+        <CakeSliceOrnament className="result-screen__decor-2" />
+        <HeartOrnament className="result-screen__decor-3" />
+      </div>
+
+      <div className="result-screen__notice">
+        {t("따끈따끈하게 완성되었어요! 🛎️", "Freshly baked and ready! 🛎️")}
+      </div>
+
+      <section className={`result-card result-card--${rarity} result-card--figma-latest`}>
+        <div className="result-card__accent-bar" style={{ backgroundColor: mbtiColors[result.mbti] ?? result.palette.accent }} />
+
+        <div className="result-card__body">
+          <h1 className="result-card__owner result-card__owner--latest">
+            <span>{displayUserName}</span>
+            {t("님의 베이커리 카드", "'s Bakery Card")}
           </h1>
-          <p className="lead">{result.summary}</p>
-          <p className="micro-copy">{rarityInfo.description}</p>
-          <div className="tag-row">
-            {result.tags.map((tag) => (
-              <span className="tag-pill" key={tag}>
+
+          <div className="result-card__badges result-card__badges--latest">
+            <span className={`rarity-pill rarity-pill--${rarity}`}>{rarityLabel}</span>
+            <span className="result-card__mbti result-card__mbti--latest">{result.mbti}</span>
+          </div>
+
+          <div className="result-card__image-wrap result-card__image-wrap--latest">
+            {imagePath ? (
+              <Image
+                alt={`${content.name} ${rarityLabel}`}
+                className="result-card__image"
+                fill
+                priority
+                sizes="(max-width: 767px) 220px, 240px"
+                src={imagePath}
+              />
+            ) : null}
+          </div>
+
+          <h2 className="result-card__title result-card__title--latest">{content.name}</h2>
+          <p className="result-card__subtitle result-card__subtitle--latest">&ldquo;{content.subtitle}&rdquo;</p>
+          <p className="result-card__intro result-card__intro--latest">{content.intro}</p>
+
+          <div className="result-card__hashtags result-card__hashtags--latest">
+            {content.hashtags.map((tag) => (
+              <span className="result-card__hashtag" key={tag}>
                 #{tag}
               </span>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="result-section">
-        <p className="eyebrow">Flavor Notes</p>
-        <div className="flavor-grid">
-          {result.flavorNotes.map((note) => (
-            <div className="flavor-chip" key={note}>
-              {note}
+          <section className="result-card__section result-card__section--latest">
+            <h3>🤔 {t("당신과 가장 닮아 있는 이유", "Why it resembles you the most")}</h3>
+            <p>{content.resemblance}</p>
+          </section>
+
+          <section className="result-card__section result-card__section--latest result-card__section--stacked">
+            <div>
+              <h3>✨ {t("연애에서 더 빛나는 포인트", "Points that shine in romance")}</h3>
+              <ul>
+                {content.shiningPoints.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
-          ))}
+            <div className="result-card__section-divider" />
+            <div>
+              <h3>⚠️ {t("주의해야 할 포인트", "Caution points")}</h3>
+              <ul>
+                {content.cautionPoints.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          <section className="result-card__section result-card__section--note">
+            <span className="result-card__section-caption">
+              {t("추천 데이트 코스", "Recommended Date Course")}
+            </span>
+            <p>&ldquo;{content.dateMood}&rdquo;</p>
+          </section>
+
+          <div className="result-card__matches result-card__matches--latest">
+            <div className="result-match-card result-match-card--good">
+              <strong>{t("환상의 짝꿍", "Perfect Match")}</strong>
+              <span className="result-match-card__dessert">
+                {content.goodMatch.dessert} <em>{content.goodMatch.mbti}</em>
+              </span>
+              <span>{content.goodMatch.desc}</span>
+            </div>
+            <div className="result-match-card">
+              <strong>{t("환장의 짝꿍", "Needs Work")}</strong>
+              <span className="result-match-card__dessert">
+                {content.trickyMatch.dessert} <em>{content.trickyMatch.mbti}</em>
+              </span>
+              <span>{content.trickyMatch.desc}</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="result-section">
-        <h2>당신과 가장 닮아 있는 이유</h2>
-        <p>{result.description}</p>
-      </section>
+      <ShareActions rarityLabel={rarityLabel} text={content.intro} title={`${content.name} | ${content.subtitle}`} />
 
-      <section className="result-columns">
-        <div className="result-section">
-          <h2>연애에서 더 빛나는 포인트</h2>
-          <ul>
-            {result.strengths.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="result-section">
-          <h2>관계에서 조심하면 좋은 점</h2>
-          <ul>
-            {result.cautions.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="result-columns">
-        <div className="result-section">
-          <h2>잘 맞는 케미 조합</h2>
-          <p>{result.bestMatch}</p>
-        </div>
-        <div className="result-section">
-          <h2>천천히 맞춰보면 좋은 타입</h2>
-          <p>{result.trickyMatch}</p>
-        </div>
-      </section>
-
-      <section className="result-section">
-        <h2>추천 데이트 무드</h2>
-        <p>{result.dateMood}</p>
-      </section>
-
-      <ShareActions
-        highlights={result.flavorNotes}
-        rarityLabel={rarityInfo.label}
-        title={`${result.name} | ${result.subtitle}`}
-        text={`${result.summary} ${result.tags.map((tag) => `#${tag}`).join(" ")}`}
-      />
-
-      <div className="result-footer">
-        <Link className="secondary-button" href="/test">
-          다시 테스트하기
+      <div className="result-footer result-footer--figma-latest">
+        <Link className="result-action-button result-action-button--secondary" href="/test">
+          {t("테스트 다시하기", "Retake Test")}
         </Link>
-        <Link className="secondary-button" href="/">
-          메인 화면으로 돌아가기
+        <Link className="result-action-button" href="/">
+          {t("메인으로 돌아가기", "Back to Home")}
         </Link>
       </div>
     </article>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ResultDetails } from "@/components/result/result-details";
@@ -45,11 +44,6 @@ export default async function ResultPage({ params, searchParams }: ResultPagePro
 
   return (
     <main className="result-page">
-      <div className="result-page-header">
-        <Link className="mini-link" href="/">
-          메인 화면으로 돌아가기
-        </Link>
-      </div>
       <ResultDetails rarity={rarity} result={result} />
     </main>
   );

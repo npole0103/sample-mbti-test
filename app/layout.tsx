@@ -1,8 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
 
+import { UiPreferencesProvider } from "@/components/providers/ui-preferences";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
+
+const notoSansKr = Noto_Sans_KR({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-kr",
+  display: "swap",
+  weight: ["400", "500", "700", "800"]
+});
+
+const notoSerifKr = Noto_Serif_KR({
+  subsets: ["latin"],
+  variable: "--font-noto-serif-kr",
+  display: "swap",
+  weight: ["400", "600", "700"]
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -36,7 +52,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body className={`${notoSansKr.variable} ${notoSerifKr.variable}`}>
+        <UiPreferencesProvider>{children}</UiPreferencesProvider>
+      </body>
     </html>
   );
 }
