@@ -3,12 +3,12 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
+  BreadOrnament,
   CakeSliceOrnament,
   CoffeeOrnament,
-  CroissantOrnament,
   HeartOrnament
 } from "@/components/landing/bakery-ornaments";
 import { useUiPreferences } from "@/components/providers/ui-preferences";
@@ -46,6 +46,7 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
   const { lang, t, userName } = useUiPreferences();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const cardExportRef = useRef<HTMLElement | null>(null);
   const imagePath = getResultImagePath(result, rarity);
   const copy = resultUiCopy[result.slug];
   const content = lang === "KOR" ? copy.ko : copy.en;
@@ -53,12 +54,12 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
   const rarityInfo = rarityMeta[rarity];
   const rarityLabel =
     lang === "KOR"
-      ? rarity === "common"
+      ? rarity === "normal"
         ? "노멀"
         : rarity === "rare"
           ? "레어"
           : "유니크"
-      : rarity === "common"
+      : rarity === "normal"
         ? "Normal"
         : rarity === "rare"
           ? "Rare"
@@ -92,8 +93,10 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
   if (!isLoaded) {
     return (
       <div className="result-loading-screen result-loading-screen--figma">
-        <CroissantOrnament className="result-loading-screen__icon" />
-        <p>{t("당신만의 특별한 베이커리 카드를 굽고 있어요...", "Baking your special bakery card...")}</p>
+        <BreadOrnament className="result-loading-screen__icon" />
+        <p className="result-loading-screen__message">
+          {t("당신만의 특별한 베이커리를 굽고 있어요", "Baking your one-of-a-kind bakery...")}
+        </p>
       </div>
     );
   }
@@ -106,23 +109,16 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
         <HeartOrnament className="result-screen__decor-3" />
       </div>
 
-      <div className="result-screen__notice">
-        {t("따끈따끈하게 완성되었어요! 🛎️", "Freshly baked and ready! 🛎️")}
-      </div>
+      <div className="result-screen__notice">{t("갓 구운 결과가 나왔어요! 🔥", "Freshly baked and ready! 🔥")}</div>
 
-      <section className={`result-card result-card--${rarity} result-card--figma-latest`}>
+      <section className={`result-card result-card--${rarity} result-card--figma-latest`} ref={cardExportRef}>
         <div className="result-card__accent-bar" style={{ backgroundColor: mbtiColors[result.mbti] ?? result.palette.accent }} />
 
         <div className="result-card__body">
           <h1 className="result-card__owner result-card__owner--latest">
             <span>{displayUserName}</span>
-            {t("님의 베이커리 카드", "'s Bakery Card")}
+            {t("의 베이커리 카드", "'s Bakery Card")}
           </h1>
-
-          <div className="result-card__badges result-card__badges--latest">
-            <span className={`rarity-pill rarity-pill--${rarity}`}>{rarityLabel}</span>
-            <span className="result-card__mbti result-card__mbti--latest">{result.mbti}</span>
-          </div>
 
           <div className="result-card__image-wrap result-card__image-wrap--latest">
             {imagePath ? (
@@ -135,6 +131,11 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
                 src={imagePath}
               />
             ) : null}
+          </div>
+
+          <div className="result-card__badges result-card__badges--latest marquee-card__pills">
+            <span className="marquee-pill marquee-pill--mbti result-card__mbti result-card__mbti--latest">{result.mbti}</span>
+            <span className={`marquee-pill marquee-pill--rarity marquee-pill--${rarity}`}>{rarityLabel}</span>
           </div>
 
           <h2 className="result-card__title result-card__title--latest">{content.name}</h2>
@@ -150,13 +151,13 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
           </div>
 
           <section className="result-card__section result-card__section--latest">
-            <h3>🤔 {t("당신과 가장 닮아 있는 이유", "Why it resembles you the most")}</h3>
+            <h3>이 디저트가 당신과 닮은 이유</h3>
             <p>{content.resemblance}</p>
           </section>
 
           <section className="result-card__section result-card__section--latest result-card__section--stacked">
             <div>
-              <h3>✨ {t("연애에서 더 빛나는 포인트", "Points that shine in romance")}</h3>
+              <h3>{t("연애에서 더 빛나는 포인트", "Points that shine in romance")}</h3>
               <ul>
                 {content.shiningPoints.map((item) => (
                   <li key={item}>{item}</li>
@@ -165,7 +166,7 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
             </div>
             <div className="result-card__section-divider" />
             <div>
-              <h3>⚠️ {t("주의해야 할 포인트", "Caution points")}</h3>
+              <h3>{t("조금 더 주의하면 좋은 포인트", "Caution points")}</h3>
               <ul>
                 {content.cautionPoints.map((item) => (
                   <li key={item}>{item}</li>
@@ -175,9 +176,7 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
           </section>
 
           <section className="result-card__section result-card__section--note">
-            <span className="result-card__section-caption">
-              {t("추천 데이트 코스", "Recommended Date Course")}
-            </span>
+            <span className="result-card__section-caption">{t("추천 데이트 코스", "Recommended Date Course")}</span>
             <p>&ldquo;{content.dateMood}&rdquo;</p>
           </section>
 
@@ -190,7 +189,7 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
               <span>{content.goodMatch.desc}</span>
             </div>
             <div className="result-match-card">
-              <strong>{t("환장의 짝꿍", "Needs Work")}</strong>
+              <strong>{t("조금 더 노력 필요", "Needs Work")}</strong>
               <span className="result-match-card__dessert">
                 {content.trickyMatch.dessert} <em>{content.trickyMatch.mbti}</em>
               </span>
@@ -200,14 +199,22 @@ export function ResultDetails({ result, rarity }: ResultDetailsProps) {
         </div>
       </section>
 
-      <ShareActions rarityLabel={rarityLabel} text={content.intro} title={`${content.name} | ${content.subtitle}`} />
+      <ShareActions
+        cardExportRef={cardExportRef}
+        dessertName={content.name}
+        imageSrc={imagePath}
+        mbti={result.mbti}
+        rarityLabel={rarityLabel}
+        summary={content.subtitle}
+        userName={displayUserName}
+      />
 
       <div className="result-footer result-footer--figma-latest">
-        <Link className="result-action-button result-action-button--secondary" href="/test">
+        <p className="result-footer__prompt">
+          {t("특정 확률로 레어와 유니크 카드를 뽑아보세요 ✨", "Try drawing rare and unique cards with a special chance ✨")}
+        </p>
+        <Link className="result-action-button result-action-button--restart" href="/">
           {t("테스트 다시하기", "Retake Test")}
-        </Link>
-        <Link className="result-action-button" href="/">
-          {t("메인으로 돌아가기", "Back to Home")}
         </Link>
       </div>
     </article>

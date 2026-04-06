@@ -1,8 +1,8 @@
 {
   "countPerRarity": 16,
   "probabilities": {
-    "common": 77,
+    "normal": 77,
     "rare": 20,
-    "superRare": 3
+    "unique": 3
   }
 }

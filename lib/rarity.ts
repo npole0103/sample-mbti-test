@@ -1,4 +1,4 @@
-export type Rarity = "common" | "rare" | "superRare";
+export type Rarity = "normal" | "rare" | "unique";
 
 export type RarityConfig = {
   probabilities: Record<Rarity, number>;
@@ -6,9 +6,9 @@ export type RarityConfig = {
 
 export const rarityConfig: RarityConfig = {
   probabilities: {
-    common: 77,
+    normal: 77,
     rare: 20,
-    superRare: 3
+    unique: 3
   }
 };
 
@@ -16,8 +16,8 @@ export const rarityMeta: Record<
   Rarity,
   { label: string; accent: string; description: string }
 > = {
-  common: {
-    label: "일반",
+  normal: {
+    label: "노멀",
     accent: "#8e5633",
     description: "기본 결과 카드"
   },
@@ -26,27 +26,27 @@ export const rarityMeta: Record<
     accent: "#b85ad8",
     description: "조금 더 특별한 결과 카드"
   },
-  superRare: {
-    label: "슈퍼 레어",
+  unique: {
+    label: "유니크",
     accent: "#e19b24",
-    description: "아주 낮은 확률의 특별 카드"
+    description: "아주 낮은 확률의 특별 결과 카드"
   }
 };
 
 export function resolveRarityFromRoll(roll: number, config: RarityConfig = rarityConfig): Rarity {
   const normalizedRoll = Math.max(0, Math.min(99, Math.floor(roll)));
-  const commonCutoff = config.probabilities.common;
-  const rareCutoff = commonCutoff + config.probabilities.rare;
+  const normalCutoff = config.probabilities.normal;
+  const rareCutoff = normalCutoff + config.probabilities.rare;
 
-  if (normalizedRoll < commonCutoff) {
-    return "common";
+  if (normalizedRoll < normalCutoff) {
+    return "normal";
   }
 
   if (normalizedRoll < rareCutoff) {
     return "rare";
   }
 
-  return "superRare";
+  return "unique";
 }
 
 export function pickRarity(randomValue = Math.random(), config: RarityConfig = rarityConfig): Rarity {
@@ -57,7 +57,7 @@ export function pickRarity(randomValue = Math.random(), config: RarityConfig = r
 export function parseRarity(value?: string | string[] | null): Rarity | null {
   const candidate = Array.isArray(value) ? value[0] : value;
 
-  if (candidate === "common" || candidate === "rare" || candidate === "superRare") {
+  if (candidate === "normal" || candidate === "rare" || candidate === "unique") {
     return candidate;
   }
 

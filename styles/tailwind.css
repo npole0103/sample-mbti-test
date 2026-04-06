@@ -3,5 +3,3 @@
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../data/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../lib/**/*.{js,ts,jsx,tsx,mdx}";
-
-@import "tw-animate-css";

@@ -39,6 +39,44 @@ export function CroissantOrnament({ className }: OrnamentProps) {
   );
 }
 
+export function BreadOrnament({ className }: OrnamentProps) {
+  return (
+    <BaseSvg className={className}>
+      <path
+        d="M13 35V22.5C13 16.7 17.7 12 23.5 12H24.5C30.3 12 35 16.7 35 22.5V35"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M13 35H35"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M19 18.5C19 16.8 20.3 15.5 22 15.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M24 16C24.8 15 25.9 14.5 27.2 14.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M28.5 18.4C29 17.1 30 16.2 31.3 15.8"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+    </BaseSvg>
+  );
+}
+
 export function CookieOrnament({ className }: OrnamentProps) {
   return (
     <BaseSvg className={className}>

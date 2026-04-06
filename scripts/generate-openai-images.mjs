@@ -51,9 +51,9 @@ function getArg(flag, fallback) {
 
 function buildRarityPlan(countPerRarity, probabilities) {
   return [
-    { rarity: "common", count: countPerRarity, probability: probabilities.common },
+    { rarity: "normal", count: countPerRarity, probability: probabilities.normal },
     { rarity: "rare", count: countPerRarity, probability: probabilities.rare },
-    { rarity: "superRare", count: countPerRarity, probability: probabilities.superRare }
+    { rarity: "unique", count: countPerRarity, probability: probabilities.unique }
   ];
 }
 
@@ -134,13 +134,13 @@ async function main() {
     10
   );
   const probabilities = {
-    common: Number.parseInt(
-      getArg("--prob-common", String(defaultRarityConfig.probabilities.common)),
+    normal: Number.parseInt(
+      getArg("--prob-normal", String(defaultRarityConfig.probabilities.normal)),
       10
     ),
     rare: Number.parseInt(getArg("--prob-rare", String(defaultRarityConfig.probabilities.rare)), 10),
-    superRare: Number.parseInt(
-      getArg("--prob-super-rare", String(defaultRarityConfig.probabilities.superRare)),
+    unique: Number.parseInt(
+      getArg("--prob-unique", String(defaultRarityConfig.probabilities.unique)),
       10
     )
   };

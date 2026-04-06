@@ -32,7 +32,7 @@ export function LandingCtaPanel({ onStart }: LandingCtaPanelProps) {
           <span className="landing-summary-item__dot" aria-hidden="true" />
           <span>
             {t(
-              "24문항에 답하면 지금의 연애 텐션을 닮은 디저트 카드가 나와요.",
+              "24문항에 답하면 지금의 연애 무드와 맞는 디저트 카드를 확인할 수 있어요.",
               "Answer 24 questions and reveal a dessert card that matches your current romance mood."
             )}
           </span>
@@ -40,13 +40,13 @@ export function LandingCtaPanel({ onStart }: LandingCtaPanelProps) {
         <p className="landing-summary-item">
           <span className="landing-summary-item__dot" aria-hidden="true" />
           <span className="landing-summary-item__rich">
-            <span className="landing-inline-pill landing-inline-pill--common">
+            <span className="landing-inline-pill landing-inline-pill--normal">
               {t("노멀", "Normal")}
             </span>
             <span className="landing-inline-pill landing-inline-pill--rare">
               {t("레어", "Rare")}
             </span>
-            <span className="landing-inline-pill landing-inline-pill--superRare">
+            <span className="landing-inline-pill landing-inline-pill--unique">
               {t("유니크", "Unique")}
             </span>
             <span>

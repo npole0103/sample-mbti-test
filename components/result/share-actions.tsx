@@ -1,17 +1,40 @@
 "use client";
 
+import type { RefObject } from "react";
 import { useState } from "react";
 import QRCode from "qrcode";
+import { toPng } from "html-to-image";
 
 import { useUiPreferences } from "@/components/providers/ui-preferences";
 
 type ShareActionsProps = {
-  title: string;
-  text: string;
+  cardExportRef: RefObject<HTMLElement | null>;
+  dessertName: string;
+  imageSrc: string | null;
+  mbti: string;
   rarityLabel: string;
+  summary: string;
+  userName: string;
 };
 
-export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
+function loadImage(src: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+    image.src = src;
+  });
+}
+
+export function ShareActions({
+  cardExportRef,
+  dessertName,
+  imageSrc,
+  mbti,
+  rarityLabel,
+  summary,
+  userName
+}: ShareActionsProps) {
   const { t } = useUiPreferences();
   const [status, setStatus] = useState("");
 
@@ -28,76 +51,67 @@ export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
     return copied;
   };
 
+  const buildShareText = () => {
+    const mainPageUrl = new URL("/", window.location.origin).toString();
+    const safeUserName = userName.trim() || t("사용자", "User");
+
+    return [
+      `${safeUserName} 님의 따끈따끈한 결과가 도착했어요 !`,
+      "",
+      `${safeUserName}님은 ${dessertName} ${summary}`,
+      "",
+      "내 연애 무드는 어떤 디저트일까?",
+      "나의 연애 무드를 지금 바로 테스트 해보세요 🍞",
+      "",
+      mainPageUrl
+    ].join("\n");
+  };
+
   const createShareImageBlob = async () => {
+    const exportNode = cardExportRef.current;
+    if (!exportNode) {
+      return null;
+    }
+
+    const cardDataUrl = await toPng(exportNode, {
+      backgroundColor: "#fffdf9",
+      cacheBust: true,
+      pixelRatio: 2
+    });
+
+    const mainPageUrl = new URL("/", window.location.origin).toString();
+    const qrDataUrl = await QRCode.toDataURL(mainPageUrl, {
+      width: 180,
+      margin: 1,
+      color: {
+        dark: "#3f281c",
+        light: "#ffffffff"
+      }
+    });
+
+    const [cardImage, qrImage] = await Promise.all([loadImage(cardDataUrl), loadImage(qrDataUrl)]);
+
     const canvas = document.createElement("canvas");
-    canvas.width = 1080;
-    canvas.height = 1350;
+    canvas.width = cardImage.width;
+    canvas.height = cardImage.height;
     const ctx = canvas.getContext("2d");
 
     if (!ctx) {
       return null;
     }
 
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, "#fff8ef");
-    gradient.addColorStop(1, "#f7ead8");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(cardImage, 0, 0);
 
-    ctx.fillStyle = "#fffdf8";
-    ctx.strokeStyle = "rgba(95, 63, 42, 0.12)";
-    ctx.lineWidth = 3;
+    const qrBoxSize = Math.max(118, Math.round(cardImage.width * 0.18));
+    const qrInset = Math.max(20, Math.round(cardImage.width * 0.045));
+    const qrPadding = 10;
+    const qrSize = qrBoxSize - qrPadding * 2;
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.96)";
     ctx.beginPath();
-    ctx.roundRect(72, 84, 936, 1182, 40);
+    ctx.roundRect(cardImage.width - qrInset - qrBoxSize, qrInset, qrBoxSize, qrBoxSize, 24);
     ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = "#c67a47";
-    ctx.font = "700 30px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText("Dessert Mood Lab", 132, 170);
-
-    ctx.fillStyle = "#3f281c";
-    ctx.font = "700 66px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText(title, 132, 286, 720);
-
-    ctx.fillStyle = "#775b49";
-    ctx.font = "500 34px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText(text, 132, 380, 760);
-
-    ctx.fillStyle = "#fff8f1";
-    ctx.beginPath();
-    ctx.roundRect(132, 444, 188, 54, 27);
-    ctx.fill();
-    ctx.fillStyle = "#c67a47";
-    ctx.font = "700 26px Pretendard, Apple SD Gothic Neo, sans-serif";
-    ctx.fillText(rarityLabel, 176, 479);
-
-    const mainPageUrl = new URL("/", window.location.origin).toString();
-
-    try {
-      const qrDataUrl = await QRCode.toDataURL(mainPageUrl, {
-        width: 220,
-        margin: 1,
-        color: {
-          dark: "#3f281c",
-          light: "#ffffffff"
-        }
-      });
-      const qrImage = new Image();
-      await new Promise<void>((resolve, reject) => {
-        qrImage.onload = () => resolve();
-        qrImage.onerror = () => reject(new Error("Failed to load QR"));
-        qrImage.src = qrDataUrl;
-      });
-
-      ctx.fillStyle = "#ffffff";
-      ctx.beginPath();
-      ctx.roundRect(718, 928, 232, 232, 24);
-      ctx.fill();
-      ctx.drawImage(qrImage, 724, 934, 220, 220);
-    } catch {
-      // QR generation is optional
-    }
+    ctx.drawImage(qrImage, cardImage.width - qrInset - qrBoxSize + qrPadding, qrInset + qrPadding, qrSize, qrSize);
 
     return await new Promise<Blob | null>((resolve) => {
       canvas.toBlob((blob) => resolve(blob), "image/png");
@@ -105,12 +119,14 @@ export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
   };
 
   const handleTextShare = async () => {
-    const shareUrl = window.location.href;
-    const shareText = `${title}\n${text}\n${shareUrl}`;
+    const shareText = buildShareText();
 
     try {
       if (navigator.share) {
-        const payload = { title, text, url: shareUrl };
+        const payload = {
+          title: `${userName || t("나", "Me")}의 결과`,
+          text: shareText
+        };
         if (!navigator.canShare || navigator.canShare(payload)) {
           await navigator.share(payload);
           setStatus(t("공유 창을 열었어요.", "Opened the share sheet."));
@@ -120,12 +136,12 @@ export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
 
       if (navigator.clipboard?.writeText && window.isSecureContext) {
         await navigator.clipboard.writeText(shareText);
-        setStatus(t("결과 문구를 복사했어요.", "Copied the result text."));
+        setStatus(t("공유 문구를 복사했어요.", "Copied the share text."));
         return;
       }
 
       if (fallbackCopy(shareText)) {
-        setStatus(t("결과 문구를 복사했어요.", "Copied the result text."));
+        setStatus(t("공유 문구를 복사했어요.", "Copied the share text."));
         return;
       }
     } catch {
@@ -146,7 +162,7 @@ export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "dessert-mood-result.png";
+    link.download = `${mbti.toLowerCase()}-${rarityLabel}-dessert-card.png`;
     document.body.append(link);
     link.click();
     link.remove();
@@ -157,15 +173,20 @@ export function ShareActions({ title, text, rarityLabel }: ShareActionsProps) {
   return (
     <div className="share-actions share-actions--figma">
       <div className="share-actions__labels">
-        <span>{t("나의 결과 저장하기", "Save my result")}</span>
-        <span>{t("나의 결과 공유하기", "Share my result")}</span>
+        <span>{t("나의 결과 저장하기 🖼️", "Save my result 🖼️")}</span>
+        <span>{t("나의 결과 공유하기 🔗", "Share my result 🔗")}</span>
       </div>
       <div className="share-buttons share-buttons--figma">
-        <button className="result-action-button result-action-button--secondary" onClick={handleImageDownload} type="button">
+        <button
+          className="result-action-button result-action-button--secondary"
+          disabled={!imageSrc}
+          onClick={handleImageDownload}
+          type="button"
+        >
           {t("이미지 저장", "Save Image")}
         </button>
         <button className="result-action-button" onClick={handleTextShare} type="button">
-          {t("결과 공유하기", "Share Result")}
+          {t("공유하기", "Share")}
         </button>
       </div>
       <p className="share-status" role="status">

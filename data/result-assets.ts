@@ -29,7 +29,7 @@ export type ResultImageCard = {
 
 export function getResultImagePath(
   result: Pick<DessertResult, "mbti">,
-  rarity: Rarity = "common"
+  rarity: Rarity = "normal"
 ) {
   const folder = imageFolderByMbti[result.mbti];
   if (!folder) {
@@ -39,7 +39,7 @@ export function getResultImagePath(
   return `/images/results/${folder}/${rarity}/${folder}-${rarity}-01-service-v2.png`;
 }
 
-const rarityOrder: Rarity[] = ["common", "rare", "superRare"];
+const rarityOrder: Rarity[] = ["normal", "rare", "unique"];
 
 export const allResultImageCards: ResultImageCard[] = Object.entries(imageFolderByMbti).flatMap(
   ([mbti, folder]) =>

@@ -8,6 +8,7 @@ import { useUiPreferences } from "@/components/providers/ui-preferences";
 import { questionCopy } from "@/data/question-copy";
 import { questions, type Trait } from "@/data/questions";
 import { pickRarity } from "@/lib/rarity";
+import { saveResultSession } from "@/lib/result-session";
 import { getResultFromAnswers } from "@/lib/scoring";
 
 const bakingStatuses = {
@@ -36,14 +37,15 @@ export function TestExperience() {
   const [answers, setAnswers] = useState<Trait[]>([]);
   const [isPending, startTransition] = useTransition();
   const unlockTimerRef = useRef<number | null>(null);
+  const safeIndex = Math.min(index, questions.length - 1);
 
-  const question = questions[index];
+  const question = questions[safeIndex];
   const copy = questionCopy[question.id];
   const localizedCopy = lang === "KOR" ? copy.ko : copy.en;
-  const currentQuestion = index + 1;
+  const currentQuestion = safeIndex + 1;
   const progress = (currentQuestion / questions.length) * 100;
   const isLastQuestion = currentQuestion === questions.length;
-  const currentAnswer = answers[index];
+  const currentAnswer = answers[safeIndex];
   const currentSelectedOption =
     currentAnswer === question.options[0].trait
       ? "A"
@@ -58,8 +60,9 @@ export function TestExperience() {
   const submitResult = (nextAnswers: Trait[]) => {
     const result = getResultFromAnswers(nextAnswers);
     const rarity = pickRarity();
+    saveResultSession({ slug: result.slug, rarity });
     startTransition(() => {
-      router.push(`/result/${result.slug}?rarity=${rarity}`);
+      router.push("/result");
     });
   };
 
@@ -81,7 +84,11 @@ export function TestExperience() {
       return;
     }
 
-    const nextAnswers = [...answers.slice(0, index), trait];
+    if (unlockTimerRef.current !== null) {
+      window.clearTimeout(unlockTimerRef.current);
+    }
+
+    const nextAnswers = [...answers.slice(0, safeIndex), trait];
     setAnswers(nextAnswers);
 
     if (isLastQuestion) {
@@ -89,7 +96,7 @@ export function TestExperience() {
     }
 
     unlockTimerRef.current = window.setTimeout(() => {
-      setIndex((current) => current + 1);
+      setIndex((current) => Math.min(current + 1, questions.length - 1));
     }, 220);
   };
 
